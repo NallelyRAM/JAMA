@@ -128,7 +128,7 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
                             .addComponent(boxDieta))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
+                .addContainerGap(148, Short.MAX_VALUE)
                 .addComponent(btnCancelar)
                 .addGap(120, 120, 120)
                 .addComponent(btnLimpiar)
