@@ -8,6 +8,24 @@ package dominio;
  *
  * @author Usuario
  */
-public class Desayuno {
+public class Desayuno extends Platillo{
+    public String colacion;
+
+    public Desayuno() {
+    }
+
+    public Desayuno(String colacion) {
+        this.colacion = colacion;
+    }
+
+    public String getColacion() {
+        return colacion;
+    }
+
+    public void setColacion(String colacion) {
+        this.colacion = colacion;
+    }
+    
+    
     
 }
