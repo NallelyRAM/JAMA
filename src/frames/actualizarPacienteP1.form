@@ -59,9 +59,7 @@
                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                  <Component id="btnSiguiente" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -77,21 +75,24 @@
                               <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtNombre" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtApellidos" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="txtEmail" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="boxDieta" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCodigo" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="comboSexo" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtTelefono" min="-2" pref="260" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="btnSiguiente" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtNombre" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
+                                          <Component id="txtApellidos" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
+                                          <Component id="txtEmail" alignment="0" min="-2" pref="260" max="-2" attributes="0"/>
+                                          <Component id="boxDieta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtCodigo" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
