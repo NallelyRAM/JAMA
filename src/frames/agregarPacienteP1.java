@@ -15,6 +15,8 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
      */
     public agregarPacienteP1() {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -45,6 +47,13 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
 
@@ -93,9 +102,19 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
 
         btnSiguiente.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -200,6 +219,20 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
     private void boxDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxDietaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxDietaActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+        FrInicio inicio = new FrInicio();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        this.dispose();
+        agregarPacienteP2 pantalla2Paciente = new agregarPacienteP2();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments

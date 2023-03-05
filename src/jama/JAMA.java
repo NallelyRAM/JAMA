@@ -4,6 +4,8 @@
  */
 package jama;
 
+import frames.FrInicio;
+
 /**
  *
  * @author Usuario
@@ -14,7 +16,7 @@ public class JAMA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrInicio inicio = new FrInicio();
     }
     
 }

@@ -15,6 +15,8 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
      */
     public actualizarPacienteP1() {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -48,6 +50,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(867, 618));
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
@@ -97,6 +100,11 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
 
         btnSiguiente.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -220,6 +228,10 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     private void boxDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxDietaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxDietaActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        actualizarPacienteP2 updatePaciente2 = new actualizarPacienteP2();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
