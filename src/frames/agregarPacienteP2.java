@@ -4,16 +4,20 @@
  */
 package frames;
 
+import dominio.Paciente;
+
 /**
  *
  * @author Usuario
  */
 public class agregarPacienteP2 extends javax.swing.JFrame {
-
+   agregarPacienteP1 pantalla1 = new agregarPacienteP1();
+   Paciente paciente = new Paciente();
     /**
      * Creates new form agregarPacienteP2
      */
     public agregarPacienteP2() {
+        this.paciente = pantalla1.getPaciente();
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -98,6 +102,11 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
 
         btnFinalzar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnFinalzar.setText("Finalizar");
+        btnFinalzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalzarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -237,6 +246,14 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
+        paciente.setPeso(55);
+        paciente.setEstatura(180);
+        paciente.setTalla(60);
+        this.dispose();
+        paciente.imprimirTodo();
+    }//GEN-LAST:event_btnFinalzarActionPerformed
 
     /**
      * @param args the command line arguments

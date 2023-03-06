@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author ldoar
  */
 public class FrInicio extends javax.swing.JFrame {
-    ArrayList<Paciente> listaPacientes = new ArrayList<Paciente>();
+    
     /**
      * Creates new form FrInicio
      */
