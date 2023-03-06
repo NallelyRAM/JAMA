@@ -20,33 +20,39 @@ public class PacienteDao {
         this.conexion = conexion;
     }
     
-//    public boolean agregar(Paciente paciente) {
-//         try {
-//            Connection conexion = this.conexion.crearConexion();
-//            Statement comandoSQL = conexion.createStatement();
-//            
-//                    
-//            String codigoSQL = String.format("INSERT INTO especies (nombre_vulgar, nombre_cientifico, familia, peligro_extincion) VALUES ('%s','%s','%s',%s);",
-//            especie.getNombreVulgar(),
-//            especie.getNombreCientifico(),
-//            especie.getFamilia(),
-//            especie.getPeligro_Extincion());
-//            
-//            int registrosAfectados = comandoSQL.executeUpdate(codigoSQL);
-//            conexion.close();
-//            if (registrosAfectados == 1) {
-//                System.out.println("La especie se a registrado exitosamente");
-//                return true;
-//            }
-//            else {System.out.println("No se pudo registar la especie");
-//                return true;
-//            }
-//            
-//        } catch (SQLException e) {
-//            System.err.println(e.getMessage());
-//            return false;
-//        }
-//    }
+    public boolean agregar(Paciente paciente) {
+         try {
+            Connection conexion = this.conexion.crearConexion();
+            Statement comandoSQL = conexion.createStatement();
+            
+                    
+            String codigoSQL = String.format("INSERT INTO pacientes(nombrePaciente, apellidosPaciente, edadPaciente, sexoPaciente) VALUES ('%s','%s','%s',%s);",
+            paciente.getNombre(),
+            paciente.getApellidos(),
+            paciente.getEdad(),
+            paciente.getSexo(),
+            paciente.getFechaNacimiento(),
+            paciente.getTelefono(),
+            paciente.getEmail(),
+            paciente.getPeso(),
+            paciente.getEstatura(),
+            paciente.getTalla());
+            
+            int registrosAfectados = comandoSQL.executeUpdate(codigoSQL);
+            conexion.close();
+            if (registrosAfectados == 1) {
+                System.out.println("Se a registrado exitosamente al paciente");
+                return true;
+            }
+            else {System.out.println("No se pudo registar al paciente");
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
 
 //    @Override
 //    public boolean actualizar(Paciente paciente) {
