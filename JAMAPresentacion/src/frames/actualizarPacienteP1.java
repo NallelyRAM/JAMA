@@ -8,7 +8,7 @@ package frames;
  *
  * @author Usuario
  */
-public class actualizarPacienteP1 extends javax.swing.JDialog {
+public class actualizarPacienteP1 extends javax.swing.JFrame {
 
     /**
      * Creates new form actualizarPacienteP1
