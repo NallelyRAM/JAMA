@@ -81,7 +81,52 @@ public class PacientesDAO implements IPacientesDAO {
 
     @Override
     public boolean actualizar(int id, Paciente paciente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        try {
+            // Deshabilitar el modo de autocommit para permitir la transacción
+            baseDatos.setAutoCommit(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Actualizar un registro en la tabla persona
+        String sqlPersona = "UPDATE personas SET nombre_vulgar='%s',"
+                    + "nombre_cientifico='%s', familia='%s', peligro_extincion=%s  "
+                    + " WHERE id =%d;";
+        try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtPersona.setString(1, paciente.getNombre() + " " + paciente.getApellidos());
+            pstmtPersona.setInt(2, paciente.getEdad());
+            pstmtPersona.setString(3, paciente.getSexo());
+            pstmtPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
+            pstmtPersona.setString(5, paciente.getTelefono());
+            pstmtPersona.setString(6, paciente.getEmail());
+            pstmtPersona.executeUpdate();
+            
+            // Obtener el ID del registro de persona recién creado
+            try (ResultSet rs = pstmtPersona.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int idPersona = rs.getInt(1);
+                    // Insertar un registro en la tabla paciente con una referencia al registro de persona recién creado
+                    String sqlPaciente = "INSERT INTO paciente (motivoConsulta, idPersona) VALUES (?, ?)";
+                    try (PreparedStatement pstmtPaciente = baseDatos.prepareStatement(sqlPaciente)) {
+                        pstmtPaciente.setString(1, paciente.getMotivoConsulta());
+                        pstmtPaciente.setInt(2, idPersona);
+                        pstmtPaciente.executeUpdate();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Confirmar la transacción
+            baseDatos.commit();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -96,7 +141,7 @@ public class PacientesDAO implements IPacientesDAO {
                 + "pa.idPaciente, pa.motivoConsulta "
                 + "FROM Persona p "
                 + "JOIN Paciente pa ON p.idPersona = pa.idPersona "
-                + "WHERE pa.idPaciente = ?;";
+                + "WHERE pa.nombre = ?;";
         try {
             PreparedStatement pstmt = baseDatos.prepareStatement(sql);
 
@@ -125,6 +170,11 @@ public class PacientesDAO implements IPacientesDAO {
     @Override
     public ArrayList<Paciente> consultarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Paciente consultarPorNombre(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

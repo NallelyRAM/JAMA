@@ -17,7 +17,9 @@ public interface IPacientesService {
     
     public ArrayList<Paciente> buscarPacientes();
 
-    public Paciente buscarPacientePorID(int id);
+    public Paciente buscarPacientePorNombre(String nombre);
 
     public boolean validar(int id);
+
+    public Paciente buscarPacientePorID(int id);
 }
