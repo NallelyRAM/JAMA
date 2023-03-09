@@ -74,7 +74,6 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel7.setText("E-mail:");
 
-        txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,8 +127,6 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
         jLabel8.setText("ID:");
 
         txtCodigo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jDate.setEnabled(false);
 
         btnActualizar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnActualizar.setText("Actualizar");
@@ -291,11 +288,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));
-        
-        paciente.setEmail(this.txtEmail.getText());
-        paciente.setTelefono(this.txtTelefono.getText());
-        
+        paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));        
         persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
     }//GEN-LAST:event_btnActualizarActionPerformed
 

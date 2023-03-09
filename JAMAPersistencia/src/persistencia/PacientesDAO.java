@@ -88,20 +88,36 @@ public class PacientesDAO implements IPacientesDAO {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
          
-         //Consultar si existe el paciente que se va a actualizar
-        if (this.consultarPorID(id) != null) {
              // Actualizar un registro en la tabla persona
-            String sqlPersona = "UPDATE paciente SET telefono='%s',"
-                        + "email='%s',"
-                        + " WHERE id =%d;";
-            try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
-                pstmtPersona.setString(1, paciente.getTelefono());
-                pstmtPersona.setString(2, paciente.getEmail());
-                pstmtPersona.executeUpdate();
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ? WHERE idPersona = ?";
+            PreparedStatement sentenciaPaciente = baseDatos.prepareStatement(consultaPaciente);
+            sentenciaPaciente.setString(1, paciente.getMotivoConsulta());
+            sentenciaPaciente.setInt(2, id);
+            
+            sentenciaPaciente.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+        try {  
+            String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE id = ?";
+            PreparedStatement sentenciaPersona = baseDatos.prepareStatement(consultaPersona);
+            sentenciaPersona.setString(1, paciente.getNombre());
+            sentenciaPersona.setInt(2,paciente.getEdad());
+            sentenciaPersona.setString(3, paciente.getSexo());
+            sentenciaPersona.setString(4, paciente.getFechaNacimiento().toString());
+            sentenciaPersona.setString(5, paciente.getEmail());
+            sentenciaPersona.setString(6, paciente.getTelefono());
+            sentenciaPersona.setInt(7, id);
+            sentenciaPersona.executeUpdate();
+
+
+            sentenciaPersona.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
