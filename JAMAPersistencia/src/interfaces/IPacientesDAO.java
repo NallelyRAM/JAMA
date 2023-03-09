@@ -38,7 +38,8 @@ public interface IPacientesDAO {
     /**
      * Consulta por ID el paciente en la BD.
      *
-     * @param id El id del paciente a buscar.
+     * 
+     * @param id
      * @return El paciente si lo encontró, null en caso contrario.
      */
     public Paciente consultarPorID(int id);
@@ -49,4 +50,6 @@ public interface IPacientesDAO {
      * @return La lista de todos los pacientes.
      */
     public ArrayList<Paciente> consultarTodos();
+
+    public Paciente consultarPorNombre(String nombre);
 }

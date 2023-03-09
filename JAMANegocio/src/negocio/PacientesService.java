@@ -65,4 +65,9 @@ public class PacientesService implements IPacientesService {
         Paciente paciente = persistencia.consultarPorID(id);
         return paciente == null;
     }
+
+    @Override
+    public Paciente buscarPacientePorNombre(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

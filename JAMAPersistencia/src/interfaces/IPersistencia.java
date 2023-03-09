@@ -20,7 +20,8 @@ public interface IPersistencia {
     public Paciente consultarPorID(int id);
 
     public ArrayList<Paciente> buscarPacientes();
-
+    
+    public Paciente consultarPorNombre(String nombre);
     // Dietas...
     // Platillos...
 }
