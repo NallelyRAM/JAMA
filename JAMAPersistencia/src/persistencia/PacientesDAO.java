@@ -81,44 +81,29 @@ public class PacientesDAO implements IPacientesDAO {
 
     @Override
     public boolean actualizar(int id, Paciente paciente) {
-        
         try {
             // Deshabilitar el modo de autocommit para permitir la transacción
             baseDatos.setAutoCommit(false);
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        // Actualizar un registro en la tabla persona
-        String sqlPersona = "UPDATE personas SET nombre_vulgar='%s',"
-                    + "nombre_cientifico='%s', familia='%s', peligro_extincion=%s  "
-                    + " WHERE id =%d;";
-        try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
-            pstmtPersona.setString(1, paciente.getNombre() + " " + paciente.getApellidos());
-            pstmtPersona.setInt(2, paciente.getEdad());
-            pstmtPersona.setString(3, paciente.getSexo());
-            pstmtPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
-            pstmtPersona.setString(5, paciente.getTelefono());
-            pstmtPersona.setString(6, paciente.getEmail());
-            pstmtPersona.executeUpdate();
-            
-            // Obtener el ID del registro de persona recién creado
-            try (ResultSet rs = pstmtPersona.getGeneratedKeys()) {
-                if (rs.next()) {
-                    int idPersona = rs.getInt(1);
-                    // Insertar un registro en la tabla paciente con una referencia al registro de persona recién creado
-                    String sqlPaciente = "INSERT INTO paciente (motivoConsulta, idPersona) VALUES (?, ?)";
-                    try (PreparedStatement pstmtPaciente = baseDatos.prepareStatement(sqlPaciente)) {
-                        pstmtPaciente.setString(1, paciente.getMotivoConsulta());
-                        pstmtPaciente.setInt(2, idPersona);
-                        pstmtPaciente.executeUpdate();
-                    }
-                }
+         
+         //Consultar si existe el paciente que se va a actualizar
+        if (this.consultarPorID(id) != null) {
+             // Actualizar un registro en la tabla persona
+            String sqlPersona = "UPDATE personas SET telefono='%s',"
+                        + "email='%s',"
+                        + " WHERE id =%d;";
+            try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
+                pstmtPersona.setString(1, paciente.getTelefono());
+                pstmtPersona.setString(2, paciente.getEmail());
+                pstmtPersona.executeUpdate();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             // Confirmar la transacción
             baseDatos.commit();
@@ -141,7 +126,7 @@ public class PacientesDAO implements IPacientesDAO {
                 + "pa.idPaciente, pa.motivoConsulta "
                 + "FROM Persona p "
                 + "JOIN Paciente pa ON p.idPersona = pa.idPersona "
-                + "WHERE pa.nombre = ?;";
+                + "WHERE pa.idPaciente = ?;";
         try {
             PreparedStatement pstmt = baseDatos.prepareStatement(sql);
 
@@ -156,10 +141,10 @@ public class PacientesDAO implements IPacientesDAO {
                 paciente.setTelefono(rs.getString("telefono"));
                 paciente.setEmail(rs.getString("email"));
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setMotivoConsulta(rs.getString("motivoConsulta"));
-                paciente.setPeso(rs.getFloat("peso"));
-                paciente.setEstatura(rs.getFloat("estatura"));
-                paciente.setTalla(rs.getFloat("talla"));
+//                paciente.setMotivoConsulta(rs.getString("motivoConsulta"));
+//                paciente.setPeso(rs.getFloat("peso"));
+//                paciente.setEstatura(rs.getFloat("estatura"));
+//                paciente.setTalla(rs.getFloat("talla"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);

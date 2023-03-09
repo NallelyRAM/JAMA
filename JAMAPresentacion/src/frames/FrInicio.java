@@ -152,10 +152,11 @@ public class FrInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jbActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarPacienteActionPerformed
-       
-        
-            actualizarPacienteP1 actualizarPaciente = new actualizarPacienteP1();
-      
+       try {
+            actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbActualizarPacienteActionPerformed
 
     /**

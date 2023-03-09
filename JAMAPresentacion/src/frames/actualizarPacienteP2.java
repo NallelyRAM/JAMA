@@ -4,21 +4,40 @@
  */
 package frames;
 
+import dominio.Paciente;
+import dominio.Persona;
+import static frames.agregarPacienteP2.paciente;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Usuario
  */
 public class actualizarPacienteP2 extends javax.swing.JFrame {
-
+    static Paciente paciente;
+    static Persona persona;
+    
     /**
      * Creates new form actualizarPacienteP2
      */
-    public actualizarPacienteP2() {
+    public actualizarPacienteP2(Paciente myPaciente, Persona persona) {
         initComponents();
+        this.paciente = myPaciente;
+        this.persona = persona;
+        this.txtAreaConsulta.setText(myPaciente.getMotivoConsulta());
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-
+    
+    public static Paciente getPaciente() {
+        if (paciente != null) {
+            return paciente;
+        }
+        return new Paciente();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,7 +225,11 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
        this.dispose();
-        actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
+        try {
+            actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     
