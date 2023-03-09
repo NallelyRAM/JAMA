@@ -91,7 +91,7 @@ public class PacientesDAO implements IPacientesDAO {
          //Consultar si existe el paciente que se va a actualizar
         if (this.consultarPorID(id) != null) {
              // Actualizar un registro en la tabla persona
-            String sqlPersona = "UPDATE personas SET telefono='%s',"
+            String sqlPersona = "UPDATE paciente SET telefono='%s',"
                         + "email='%s',"
                         + " WHERE id =%d;";
             try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
