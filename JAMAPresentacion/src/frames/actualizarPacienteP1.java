@@ -288,7 +288,12 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));        
+        paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));
+        paciente.setNombre(this.txtNombre.getText());
+        paciente.setEmail(this.txtEmail.getText());
+        paciente.setTelefono(this.txtTelefono.getText());
+        paciente.setFechaNacimiento(this.jDate.getDate());
+        
         persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
     }//GEN-LAST:event_btnActualizarActionPerformed
 

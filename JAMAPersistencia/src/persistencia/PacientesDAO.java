@@ -90,7 +90,7 @@ public class PacientesDAO implements IPacientesDAO {
          
              // Actualizar un registro en la tabla persona
         try {
-            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ? WHERE idPersona = ?";
+            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ? WHERE idPaciente = ?";
             PreparedStatement sentenciaPaciente = baseDatos.prepareStatement(consultaPaciente);
             sentenciaPaciente.setString(1, paciente.getMotivoConsulta());
             sentenciaPaciente.setInt(2, id);
@@ -99,21 +99,17 @@ public class PacientesDAO implements IPacientesDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            
+                  
         try {  
-            String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE id = ?";
+            String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE idPersona = ?";
             PreparedStatement sentenciaPersona = baseDatos.prepareStatement(consultaPersona);
             sentenciaPersona.setString(1, paciente.getNombre());
             sentenciaPersona.setInt(2,paciente.getEdad());
             sentenciaPersona.setString(3, paciente.getSexo());
-            sentenciaPersona.setString(4, paciente.getFechaNacimiento().toString());
+            sentenciaPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
             sentenciaPersona.setString(5, paciente.getEmail());
             sentenciaPersona.setString(6, paciente.getTelefono());
             sentenciaPersona.setInt(7, id);
-            sentenciaPersona.executeUpdate();
-
-
             sentenciaPersona.executeUpdate();
 
         } catch (SQLException ex) {
@@ -157,7 +153,7 @@ public class PacientesDAO implements IPacientesDAO {
                 paciente.setTelefono(rs.getString("telefono"));
                 paciente.setEmail(rs.getString("email"));
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
-//                paciente.setMotivoConsulta(rs.getString("motivoConsulta"));
+                paciente.setMotivoConsulta(rs.getString("motivoConsulta"));
 //                paciente.setPeso(rs.getFloat("peso"));
 //                paciente.setEstatura(rs.getFloat("estatura"));
 //                paciente.setTalla(rs.getFloat("talla"));
