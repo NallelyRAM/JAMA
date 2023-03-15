@@ -18,9 +18,23 @@ public class Platillo {
     public Platillo() {
     }
     
-    //FALTA CONSTRUCTOR CON TODAS LAS VARIABLES
+    //CONSTRUCTOR CON TODAS LAS VARIABLES
+    public Platillo(String nombre, String ingredientes, String acompanante, float numCalorias, byte foto) {
+        this.nombre = nombre;
+        this.ingredientes = ingredientes;
+        this.acompanante = acompanante;
+        this.numCalorias = numCalorias;
+        this.foto = foto;
+    }
+    
+    //GET Y SET DE FOTO
+    public byte getFoto() {    
+        return foto;
+    }
+    public void setFoto(byte foto) {
+        this.foto = foto;
+    }
 
-    //NO HAY GET Y SET DE FOTO 
     public String getNombre() {
         return nombre;
     }
