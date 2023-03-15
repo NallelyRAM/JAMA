@@ -66,6 +66,16 @@ public class Platillo {
     public void setNumCalorias(float numCalorias) {
         this.numCalorias = numCalorias;
     }
+
+    //TO STRING
+    @Override
+    public String toString() {
+        return "Platillo{" + "nombre=" + nombre 
+                + ", ingredientes=" + ingredientes 
+                + ", acompanante=" + acompanante 
+                + ", numCalorias=" + numCalorias 
+                + ", foto=" + foto + '}';
+    }
     
     
     

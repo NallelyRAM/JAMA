@@ -9,5 +9,13 @@ package dominio;
  * @author Usuario
  */
 public class Cena extends Platillo{
+
+    //CONSTRUCTORES
+    public Cena() {
+    }
+
+    public Cena(String nombre, String ingredientes, String acompanante, float numCalorias, byte foto) {
+        super(nombre, ingredientes, acompanante, numCalorias, foto);
+    }
     
 }
