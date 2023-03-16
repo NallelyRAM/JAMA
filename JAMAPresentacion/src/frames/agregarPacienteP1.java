@@ -133,6 +133,11 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,20 +272,38 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+//
+//        String nombre = txtNombre.getText();
+//        String apellidos = txtApellidos.getText();
+//        String sexo = comboSexo.getSelectedItem().toString();
+//        String telefono = txtTelefono.getText();
+//        String email = txtEmail.getText();
+//        Date fechaNacimiento = dateChooser.getDate();
+//
+//        Persona persona = new Persona(nombre, apellidos, sexo, fechaNacimiento, telefono, email);
+//
+//        dispose();
+//        Paciente myPaciente = new Paciente();
+//        ap2 = new agregarPacienteP2(myPaciente, persona);
+        if (validacion()) {
+            String nombre = txtNombre.getText();
+            String apellidos = txtApellidos.getText();
+            String sexo = comboSexo.getSelectedItem().toString();
+            String telefono = txtTelefono.getText();
+            String email = txtEmail.getText();
+            Date fechaNacimiento = dateChooser.getDate();
+            Persona persona = new Persona(nombre, apellidos, sexo, fechaNacimiento, telefono, email);
 
-        String nombre = txtNombre.getText();
-        String apellidos = txtApellidos.getText();
-        String sexo = comboSexo.getSelectedItem().toString();
-        String telefono = txtTelefono.getText();
-        String email = txtEmail.getText();
-        Date fechaNacimiento = dateChooser.getDate();
+            dispose();
+            Paciente myPaciente = new Paciente();
+            ap2 = new agregarPacienteP2(myPaciente, persona);
+        }
 
-        Persona persona = new Persona(nombre, apellidos, sexo, fechaNacimiento, telefono, email);
-
-        dispose();
-        Paciente myPaciente = new Paciente();
-        ap2 = new agregarPacienteP2(myPaciente, persona);
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        btnLimpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     public static void guardarCambios(Paciente myPaciente, Persona persona) {
 
@@ -291,8 +314,29 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         System.out.println(paciente.toString());
         if (persistenciaFachada.registrarPaciente(paciente)) {
             JOptionPane.showMessageDialog(null, "Paciente guardado con éxito.",
-                            "Paciente", JOptionPane.INFORMATION_MESSAGE);
+                    "Paciente", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    private void btnLimpiar() {
+        this.txtNombre.setText("");
+        this.txtApellidos.setText("");
+        this.txtTelefono.setText("");
+        this.txtEmail.setText("");
+        this.dateChooser.setCalendar(null);
+    }
+
+    private boolean validacion() {
+        if (txtNombre.getText().equals("")
+                || txtApellidos.getText().equals("")
+                || txtEmail.getText().equals("")
+                || txtTelefono.getText().equals("")
+                || dateChooser.getCalendar().toString().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
+            return false;
+        }
+        return true;
     }
 
 

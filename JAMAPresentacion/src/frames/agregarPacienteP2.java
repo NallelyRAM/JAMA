@@ -6,6 +6,7 @@ package frames;
 
 import dominio.Paciente;
 import dominio.Persona;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
 
     /**
      * Creates new form agregarPacienteP2
+     *
      * @param myPaciente
      * @param persona
      */
@@ -28,8 +30,6 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-    
-    
 
     public static Paciente getPaciente() {
         if (paciente != null) {
@@ -119,6 +119,11 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnFinalzar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnFinalzar.setText("Finalizar");
@@ -186,7 +191,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalzar)
                     .addComponent(btnLimpiar))
@@ -247,22 +252,56 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
 
     private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
 
-        float talla = Float.parseFloat(txtTalla.getText());
-        float estatura = Float.parseFloat(txtAltura.getText());
-        float peso = Float.parseFloat(txtPeso.getText());
-        String motivoConsulta = txtAreaConsulta.getText();
-        
-        paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
+//        float talla = Float.parseFloat(txtTalla.getText());
+//        float estatura = Float.parseFloat(txtAltura.getText());
+//        float peso = Float.parseFloat(txtPeso.getText());
+//        String motivoConsulta = txtAreaConsulta.getText();
+//        
+//        paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
+//
+//        agregarPacienteP1.guardarCambios(paciente, persona);
+//        dispose();
+        if (validacion()) {
+            float talla = Float.parseFloat(txtTalla.getText());
+            float estatura = Float.parseFloat(txtAltura.getText());
+            float peso = Float.parseFloat(txtPeso.getText());
+            String motivoConsulta = txtAreaConsulta.getText();
 
-        agregarPacienteP1.guardarCambios(paciente, persona);
-        dispose();
+            paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
+
+            agregarPacienteP1.guardarCambios(paciente, persona);
+            dispose();
+        }
+
     }//GEN-LAST:event_btnFinalzarActionPerformed
 
     private void txtTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTallaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTallaActionPerformed
 
-   
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        btnLimpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnLimpiar() {
+        this.txtPeso.setText("");
+        this.txtAltura.setText("");
+        this.txtTalla.setText("");
+        this.txtAreaConsulta.setText("");
+    }
+
+    private boolean validacion() {
+        if (txtPeso.getText().equals("")
+                || txtAltura.getText().equals("")
+                || txtTalla.getText().equals("")
+                || txtAreaConsulta.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
+            return false;
+        }
+        return true;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
