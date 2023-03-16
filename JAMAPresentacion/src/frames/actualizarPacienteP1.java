@@ -21,7 +21,7 @@ import negocio.PersistenciaFachada;
 public class actualizarPacienteP1 extends javax.swing.JFrame {
 
     static IPersistenciaFachada persistenciaFachada;
-    Paciente paciente;
+    Paciente paciente = new Paciente();
     actualizarPacienteP2 acp2;
 
     /**
@@ -295,14 +295,13 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));
-        paciente.setNombre(this.txtNombre.getText());
-        paciente.setEmail(this.txtEmail.getText());
-        paciente.setTelefono(this.txtTelefono.getText());
-        paciente.setFechaNacimiento(this.jDate.getDate());
-        persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
-        JOptionPane.showMessageDialog(null, "Paciente actualizado con éxito");
-        dispose();
+        if (validacion()) {
+            paciente = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));
+            paciente.setFechaNacimiento(this.jDate.getDate());
+            persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
+            JOptionPane.showMessageDialog(null, "Paciente actualizado con éxito");
+            dispose();
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private boolean validacion() {
@@ -317,7 +316,44 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
             return false;
         }
+
+        if (validarNumero(this.txtTelefono.getText())) {
+            paciente.setTelefono(this.txtTelefono.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Número inválido, favor de ingresar nuevamente.");
+            this.txtTelefono.setText("");
+            return false;
+        }
+
+        if (validarNombre(this.txtNombre.getText())) {
+            paciente.setNombre(this.txtNombre.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Nombre inválido, favor de ingresar nuevamente.");
+            this.txtNombre.setText("");
+            return false;
+        }
+        if (this.txtEmail.getText().contains("@") || this.txtEmail.getText().contains("@gmail.com") || this.txtEmail.getText().contains("@hotmail.com")) {
+            paciente.setEmail(this.txtEmail.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Correo inválido, favor de ingresar nuevamente.");
+            this.txtEmail.setText("");
+        }
+        
         return true;
+    }
+
+    public static boolean validarNombre(String nombre) {
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$"; // Expresión regular para nombres válidos
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nombre);
+        return matcher.matches();
+    }
+
+    public static boolean validarNumero(String numero) {
+        String regex = "^[+]?[0-9]{10,13}$"; // Expresión regular para números de teléfono válidos
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numero);
+        return matcher.matches();
     }
 
 
