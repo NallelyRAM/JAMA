@@ -9,6 +9,7 @@ import dominio.Persona;
 import interfaces.IPersistenciaFachada;
 import java.sql.SQLException;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import negocio.PersistenciaFachada;
 
 /**
@@ -16,9 +17,11 @@ import negocio.PersistenciaFachada;
  * @author Usuario
  */
 public class actualizarPacienteP1 extends javax.swing.JFrame {
+
     static IPersistenciaFachada persistenciaFachada;
     Paciente paciente;
     actualizarPacienteP2 acp2;
+
     /**
      * Creates new form actualizarPacienteP1
      */
@@ -265,9 +268,11 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_boxDietaActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        dispose();
-        Paciente myPaciente = new Paciente();
-        acp2 =  new actualizarPacienteP2(myPaciente, paciente);
+        if (validacion()) {
+            dispose();
+            Paciente myPaciente = new Paciente();
+            acp2 = new actualizarPacienteP2(myPaciente, paciente);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -280,7 +285,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Persona persona = persistenciaFachada.buscarPacientePorID(Integer.parseInt(this.txtCodigo.getText()));
-        
+
         this.txtNombre.setText(persona.getNombre());
         this.jDate.setDate(persona.getFechaNacimiento());
         this.txtTelefono.setText(persona.getTelefono());
@@ -293,11 +298,22 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
         paciente.setEmail(this.txtEmail.getText());
         paciente.setTelefono(this.txtTelefono.getText());
         paciente.setFechaNacimiento(this.jDate.getDate());
-        
         persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
+        JOptionPane.showMessageDialog(null, "Paciente actualizado con éxito");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    
+    private boolean validacion() {
+        if (txtNombre.getText().equals("")
+                || txtEmail.getText().equals("")
+                || txtTelefono.getText().equals("")
+                || jDate.getCalendar().toString().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
+            return false;
+        }
+        return true;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;

@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  * @author Usuario
  */
 public class actualizarPacienteP2 extends javax.swing.JFrame {
+
     static Paciente paciente;
     static Persona persona;
-    
+
     /**
      * Creates new form actualizarPacienteP2
      */
@@ -30,14 +31,14 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
     }
-    
+
     public static Paciente getPaciente() {
         if (paciente != null) {
             return paciente;
         }
         return new Paciente();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,6 +106,11 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnFinalzar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnFinalzar.setText("Finalizar");
@@ -165,7 +171,7 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnFinalzar))
@@ -224,7 +230,7 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-       this.dispose();
+        this.dispose();
         try {
             actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
         } catch (SQLException ex) {
@@ -232,7 +238,15 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAtrasActionPerformed
 
-    
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        btnLimpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnLimpiar(){
+        this.txtTalla.setText("");
+        this.txtPeso.setText("");
+        this.txtAreaConsulta.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
