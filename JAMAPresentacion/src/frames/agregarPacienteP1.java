@@ -9,6 +9,8 @@ import dominio.Persona;
 import interfaces.IPersistenciaFachada;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import negocio.PersistenciaFachada;
 
@@ -272,31 +274,49 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-//
-//        String nombre = txtNombre.getText();
-//        String apellidos = txtApellidos.getText();
-//        String sexo = comboSexo.getSelectedItem().toString();
-//        String telefono = txtTelefono.getText();
-//        String email = txtEmail.getText();
-//        Date fechaNacimiento = dateChooser.getDate();
-//
-//        Persona persona = new Persona(nombre, apellidos, sexo, fechaNacimiento, telefono, email);
-//
-//        dispose();
-//        Paciente myPaciente = new Paciente();
-//        ap2 = new agregarPacienteP2(myPaciente, persona);
-        if (validacion()) {
-            String nombre = txtNombre.getText();
-            String apellidos = txtApellidos.getText();
-            String sexo = comboSexo.getSelectedItem().toString();
-            String telefono = txtTelefono.getText();
-            String email = txtEmail.getText();
-            Date fechaNacimiento = dateChooser.getDate();
-            Persona persona = new Persona(nombre, apellidos, sexo, fechaNacimiento, telefono, email);
 
-            dispose();
-            Paciente myPaciente = new Paciente();
-            ap2 = new agregarPacienteP2(myPaciente, persona);
+        if (validacion()) {
+            Persona persona = new Persona();
+            if (validarNombre(this.txtNombre.getText()) == true) {
+                String nombre = txtNombre.getText();
+                persona.setNombre(nombre);
+                if (validarNombre(this.txtApellidos.getText()) == true) {
+                    String apellidos = txtApellidos.getText();
+                    persona.setApellidos(apellidos);
+                    if (validarNumero(this.txtTelefono.getText()) == true) {
+                        String telefono = txtTelefono.getText();
+                        persona.setTelefono(telefono);
+                        if (this.txtEmail.getText().contains("@") || this.txtEmail.getText().contains("@gmail.com") || this.txtEmail.getText().contains("@hotmail.com")) {
+
+                            String email = txtEmail.getText();
+                            persona.setEmail(email);
+                            String sexo = comboSexo.getSelectedItem().toString();
+                            persona.setSexo(sexo);
+                            Date fechaNacimiento = dateChooser.getDate();
+                            persona.setFechaNacimiento(fechaNacimiento);
+                            
+                            
+                            dispose();
+                            Paciente myPaciente = new Paciente();
+                            ap2 = new agregarPacienteP2(myPaciente, persona);
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Correo inválido, favor de ingresar nuevamente.");
+                            this.txtEmail.setText("");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Número inválido, favor de ingresar nuevamente.");
+                        this.txtTelefono.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Apellidos inválidos, favor de ingresar nuevamente.");
+                    this.txtApellidos.setText("");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre inválido, favor de ingresar nuevamente.");
+                this.txtNombre.setText("");
+            }
+
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -339,6 +359,19 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         return true;
     }
 
+    public static boolean validarNombre(String nombre) {
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$"; // Expresión regular para nombres válidos
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nombre);
+        return matcher.matches();
+    }
+
+    public static boolean validarNumero(String numero) {
+        String regex = "^[+]?[0-9]{10,13}$"; // Expresión regular para números de teléfono válidos
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numero);
+        return matcher.matches();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;

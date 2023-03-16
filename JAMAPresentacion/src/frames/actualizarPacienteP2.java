@@ -7,9 +7,11 @@ package frames;
 import dominio.Paciente;
 import dominio.Persona;
 import static frames.agregarPacienteP2.paciente;
+import static frames.agregarPacienteP2.persona;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,7 +58,7 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
         txtTalla = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtAltura = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaConsulta = new javax.swing.JTextArea();
         btnLimpiar = new javax.swing.JButton();
@@ -98,7 +100,12 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
 
         txtTalla.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtAltura.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtAltura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAlturaActionPerformed(evt);
+            }
+        });
 
         txtAreaConsulta.setColumns(20);
         txtAreaConsulta.setRows(5);
@@ -114,6 +121,11 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
 
         btnFinalzar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnFinalzar.setText("Finalizar");
+        btnFinalzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalzarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,7 +147,7 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtTalla, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -166,12 +178,12 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnFinalzar))
@@ -242,10 +254,46 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
         btnLimpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void btnLimpiar(){
+    private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
+        try {
+            if (!validacion()) {
+                float talla = Float.parseFloat(txtTalla.getText());
+                float estatura = Float.parseFloat(txtAltura.getText());
+                float peso = Float.parseFloat(txtPeso.getText());
+                String motivoConsulta = txtAreaConsulta.getText();
+
+                paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
+
+                agregarPacienteP1.guardarCambios(paciente, persona);
+                JOptionPane.showMessageDialog(null, "Paciente actualizado correctamente.");
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar los datos, llenelos e intentelo de nuevo.");
+            btnLimpiar();
+        }
+    }//GEN-LAST:event_btnFinalzarActionPerformed
+
+    private void txtAlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAlturaActionPerformed
+
+    private void btnLimpiar() {
         this.txtTalla.setText("");
         this.txtPeso.setText("");
         this.txtAreaConsulta.setText("");
+    }
+
+    private boolean validacion() {
+        if (txtPeso.getText().equals("")
+                || txtAltura.getText().equals("")
+                || txtTalla.getText().equals("")
+                || txtAreaConsulta.getText().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
+            return false;
+        }
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,7 +308,7 @@ public class actualizarPacienteP2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtAltura;
     private javax.swing.JTextArea txtAreaConsulta;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtTalla;

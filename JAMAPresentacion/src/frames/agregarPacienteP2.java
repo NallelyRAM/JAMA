@@ -261,17 +261,23 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
 //
 //        agregarPacienteP1.guardarCambios(paciente, persona);
 //        dispose();
-        if (validacion()) {
-            float talla = Float.parseFloat(txtTalla.getText());
-            float estatura = Float.parseFloat(txtAltura.getText());
-            float peso = Float.parseFloat(txtPeso.getText());
-            String motivoConsulta = txtAreaConsulta.getText();
+        try {
+            if (validacion()) {
+                float talla = Float.parseFloat(txtTalla.getText());
+                float estatura = Float.parseFloat(txtAltura.getText());
+                float peso = Float.parseFloat(txtPeso.getText());
+                String motivoConsulta = txtAreaConsulta.getText();
 
-            paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
+                paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
 
-            agregarPacienteP1.guardarCambios(paciente, persona);
-            dispose();
+                agregarPacienteP1.guardarCambios(paciente, persona);
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al registrar los datos, llenelos e intentelo de nuevo.");
+            btnLimpiar();
         }
+
 
     }//GEN-LAST:event_btnFinalzarActionPerformed
 

@@ -9,6 +9,8 @@ import dominio.Persona;
 import interfaces.IPersistenciaFachada;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import negocio.PersistenciaFachada;
 
@@ -300,12 +302,16 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
         paciente.setFechaNacimiento(this.jDate.getDate());
         persistenciaFachada.actualizarPaciente(Integer.parseInt(this.txtCodigo.getText()), paciente);
         JOptionPane.showMessageDialog(null, "Paciente actualizado con éxito");
+        dispose();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private boolean validacion() {
         if (txtNombre.getText().equals("")
                 || txtEmail.getText().equals("")
                 || txtTelefono.getText().equals("")
+                || txtTelefono.getText().contains(".")
+                || txtTelefono.getText().contains("-")
+                || txtTelefono.getText().contains(",")
                 || jDate.getCalendar().toString().equals("")) {
 
             JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
