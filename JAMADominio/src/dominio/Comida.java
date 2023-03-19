@@ -11,6 +11,11 @@ package dominio;
 public class Comida extends Platillo{
     public String colacion;
 
+    public Comida(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
+        super(nombre, ingredientes, acompanante, numCalorias, foto);
+        this.colacion = colacion;
+    }
+    
     public Comida() {
     }
 

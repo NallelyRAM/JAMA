@@ -1,5 +1,6 @@
 package interfaces;
 
+import dominio.Dieta;
 import dominio.Paciente;
 import java.util.ArrayList;
 
@@ -17,11 +18,25 @@ public interface IPersistencia {
 
     public boolean eliminarPaciente(int id);
 
-    public Paciente consultarPorID(int id);
+    public Paciente consultarPorIDPaciente(int id);
 
     public ArrayList<Paciente> buscarPacientes();
     
-    public Paciente consultarPorNombre(String nombre);
+    public Paciente consultarPorNombrePaciente(String nombre);
+    
     // Dietas...
+    public boolean agregarDieta(Dieta dieta);
+
+    public boolean actualizarDieta(int id, Dieta dieta);
+
+    public boolean eliminarDieta(int id);
+
+    public Dieta consultarPorIDDieta(int id);
+
+    public ArrayList<Dieta> buscarDietas();
+    
+    public Dieta consultarPorNombreDieta(String nombre);
+    
+    
     // Platillos...
 }

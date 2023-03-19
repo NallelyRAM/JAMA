@@ -4,17 +4,51 @@
  */
 package frames;
 
+import dominio.Cena;
+import dominio.Comida;
+import dominio.Desayuno;
+import dominio.Dieta;
+import dominio.Paciente;
+import dominio.Platillo;
+import interfaces.IPersistenciaFachada;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import negocio.PersistenciaFachada;
+
 /**
  *
  * @author Usuario
  */
 public class agregarDieta extends javax.swing.JFrame {
 
+    byte[] myImgDesayuno;
+    byte[] myImgComida;
+    byte[] myImgCena;
+    IPersistenciaFachada persistenciaFachada;
+    
     /**
      * Creates new form agregarDieta
+     * @throws java.sql.SQLException
      */
-    public agregarDieta() {
+    public agregarDieta() throws SQLException {
         initComponents();
+        setLocationRelativeTo(null);
+        this.persistenciaFachada = PersistenciaFachada.getInstance();
     }
 
     /**
@@ -28,69 +62,106 @@ public class agregarDieta extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblNombreNutriologo1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNombrePaciente = new javax.swing.JTextField();
-        NumDieta = new javax.swing.JComboBox<>();
+        txtNombreDieta = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         fechaFinal = new com.toedter.calendar.JDateChooser();
-        fechaInicio1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        fechaInicio = new com.toedter.calendar.JDateChooser();
+        comboDia = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        btn_más = new javax.swing.JButton();
         txtNombreDesayuno = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtIngedientesDesayuno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtAcompananteDesayuno = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtColacionDesayuno = new javax.swing.JTextField();
-        lblFotoDesayuno = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        btn_más2 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtNombreComida = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtIngedientesComida = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        txtAcompananteComida = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtColacionComida = new javax.swing.JTextField();
-        lblFotoComida = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        btn_más3 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         txtNombreCena = new javax.swing.JTextField();
-        lblFotoCena = new javax.swing.JLabel();
-        txtIngedientesCena = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        txtAcompananteCena = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        imgCena = new javax.swing.JLabel();
+        imgDesayuno = new javax.swing.JLabel();
+        imgComida = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtNumCaloriasDesayuno = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAcompañanteDesayuno = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtIngredientesDesayuno = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtIngredientesComida = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtAcompañanteComida = new javax.swing.JTextArea();
+        txtColacionDesayuno = new javax.swing.JTextField();
+        txtNumCaloriasComida = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtIngredientesCena = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtAcompañanteCena = new javax.swing.JTextArea();
+        txtColacionCena = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtNumCaloriasCena = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Agregar Dieta");
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 153));
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel10.setText("Nutriólogo:");
+
+        lblNombreNutriologo1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblNombreNutriologo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombreNutriologo1.setText("...");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(367, 367, 367)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel10)
+                .addGap(6, 6, Short.MAX_VALUE)
+                .addComponent(lblNombreNutriologo1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(Logo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(431, 431, 431))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(Logo)
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(20, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(33, 33, 33))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblNombreNutriologo1)
+                                .addGap(44, 44, 44))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -98,7 +169,8 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel1.setText("Nombre");
 
-        NumDieta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtNombreDieta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombreDieta.setText("Dieta 1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,37 +180,42 @@ public class agregarDieta extends javax.swing.JFrame {
                 .addGap(96, 96, 96)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
-                .addComponent(NumDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addComponent(txtNombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombrePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(NumDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(txtNombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        txtNombrePaciente.getAccessibleContext().setAccessibleName("");
+        txtNombreDieta.getAccessibleContext().setAccessibleName("");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Día1", "Día2", "Día3", "Día 4", "Día 5", "Día 6", "Día 7" }));
+        fechaFinal.setEnabled(false);
+
+        fechaInicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                fechaInicioPropertyChange(evt);
+            }
+        });
+
+        comboDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7" }));
+        comboDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboDiaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel2.setText("Desayuno");
 
-        btn_más.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/mas1.PNG"))); // NOI18N
-
-        txtNombreDesayuno.setEditable(false);
+        txtNombreDesayuno.setText("Desayuno1");
 
         jLabel3.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel3.setText("Nombre");
@@ -146,59 +223,41 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel4.setText("Ingredientes");
 
-        txtIngedientesDesayuno.setEditable(false);
-
         jLabel5.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel5.setText("Acompañantes");
 
-        txtAcompananteDesayuno.setEditable(false);
-
         jLabel6.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel6.setText("Colación");
-
-        txtColacionDesayuno.setEditable(false);
+        jLabel6.setText("Número de Calorías");
 
         jLabel13.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel13.setText("Comida");
 
-        btn_más2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/mas1.PNG"))); // NOI18N
-
         jLabel14.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel14.setText("Nombre");
 
-        txtNombreComida.setEditable(false);
+        txtNombreComida.setText("Comida1");
 
         jLabel15.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel15.setText("Ingredientes");
 
-        txtIngedientesComida.setEditable(false);
-
         jLabel16.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel16.setText("Acompañantes");
-
-        txtAcompananteComida.setEditable(false);
 
         jLabel17.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel17.setText("Colación");
 
-        txtColacionComida.setEditable(false);
+        txtColacionComida.setText("comida colacion");
 
         jLabel19.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel19.setText("Cena");
 
-        btn_más3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/mas1.PNG"))); // NOI18N
-
         jLabel20.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel20.setText("Nombre");
 
-        txtNombreCena.setEditable(false);
-
-        txtIngedientesCena.setEditable(false);
+        txtNombreCena.setText("cena1 papu");
 
         jLabel22.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel22.setText("Ingredientes");
-
-        txtAcompananteCena.setEditable(false);
 
         jLabel23.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel23.setText("Acompañantes");
@@ -208,6 +267,100 @@ public class agregarDieta extends javax.swing.JFrame {
 
         btnGuardar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        imgCena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imgIcon.png"))); // NOI18N
+        imgCena.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        imgCena.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imgCena.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgCenaMousePressed(evt);
+            }
+        });
+
+        imgDesayuno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imgIcon.png"))); // NOI18N
+        imgDesayuno.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        imgDesayuno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imgDesayuno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgDesayunoMousePressed(evt);
+            }
+        });
+
+        imgComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/imgIcon.png"))); // NOI18N
+        imgComida.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        imgComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imgComida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imgComidaMousePressed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("-");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel8.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        jLabel8.setText("Colación");
+
+        jLabel11.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        jLabel11.setText("Número de Calorías");
+
+        txtNumCaloriasDesayuno.setText("2684");
+
+        jLabel12.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        jLabel12.setText("Número de Calorías");
+
+        txtAcompañanteDesayuno.setColumns(20);
+        txtAcompañanteDesayuno.setRows(5);
+        txtAcompañanteDesayuno.setText("Acompañante desayuno\n");
+        jScrollPane1.setViewportView(txtAcompañanteDesayuno);
+
+        txtIngredientesDesayuno.setColumns(20);
+        txtIngredientesDesayuno.setRows(5);
+        txtIngredientesDesayuno.setText("ingredientes desayuno\n");
+        jScrollPane2.setViewportView(txtIngredientesDesayuno);
+
+        txtIngredientesComida.setColumns(20);
+        txtIngredientesComida.setRows(5);
+        txtIngredientesComida.setText("Ingredientes comida\n\n");
+        jScrollPane3.setViewportView(txtIngredientesComida);
+
+        txtAcompañanteComida.setColumns(20);
+        txtAcompañanteComida.setRows(5);
+        txtAcompañanteComida.setText("Acompañante comida\n");
+        jScrollPane4.setViewportView(txtAcompañanteComida);
+
+        txtColacionDesayuno.setText("Desayuno colacion");
+
+        txtNumCaloriasComida.setText("3000");
+
+        txtIngredientesCena.setColumns(20);
+        txtIngredientesCena.setRows(5);
+        txtIngredientesCena.setText("Ingredientes cena\n");
+        jScrollPane5.setViewportView(txtIngredientesCena);
+
+        txtAcompañanteCena.setColumns(20);
+        txtAcompañanteCena.setRows(5);
+        txtAcompañanteCena.setText("Acompañante Cena");
+        jScrollPane6.setViewportView(txtAcompañanteCena);
+
+        txtColacionCena.setText("comida colacion");
+
+        jLabel18.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
+        jLabel18.setText("Colación");
+
+        txtNumCaloriasCena.setText("2500");
+        txtNumCaloriasCena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumCaloriasCenaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -216,184 +369,197 @@ public class agregarDieta extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
+                        .addGap(484, 484, 484)
+                        .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_más, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtNombreDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3))
+                                        .addGap(85, 85, 85))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(txtNombreDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(imgDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNumCaloriasDesayuno, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIngedientesDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAcompananteDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)
-                                .addComponent(lblFotoDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel15)
+                                            .addComponent(jLabel14)
+                                            .addComponent(txtNombreComida, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(imgComida, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtNumCaloriasComida, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtColacionComida, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))))
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel13)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btn_más2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(txtNombreComida, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel23)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jLabel18)
+                                    .addComponent(txtColacionCena)
+                                    .addComponent(txtNumCaloriasCena))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel17)
+                                            .addComponent(jLabel19)
+                                            .addComponent(jLabel20)
+                                            .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel14)
-                                                    .addComponent(jLabel15)
-                                                    .addComponent(jLabel16))
-                                                .addGap(247, 247, 247)
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                            .addComponent(jLabel19)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(btn_más3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel20)
-                                                            .addComponent(jLabel22)
-                                                            .addComponent(jLabel23)))
-                                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(txtIngedientesCena, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtAcompananteCena, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGap(34, 34, 34)
-                                                        .addComponent(lblFotoCena, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addGap(2, 2, 2)
+                                                .addComponent(jLabel22)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(imgCena, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtIngedientesComida, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtAcompananteComida, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(34, 34, 34)
-                                        .addComponent(lblFotoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 6, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtColacionComida, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(110, 110, 110)
-                                .addComponent(btnCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGuardar)
-                                .addGap(64, 64, 64))))))
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(42, 42, 42))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(btn_más, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtIngedientesDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAcompananteDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblFotoDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jLabel13))
-                                    .addComponent(btn_más2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel13)
+                                .addGap(9, 9, 9)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNombreComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtIngedientesComida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel16)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtAcompananteComida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblFotoComida, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel15))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jLabel2)
+                                    .addGap(3, 3, 3)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNombreDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel4))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(imgComida, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jLabel19))
-                                    .addComponent(btn_más3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFotoCena, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(txtIngedientesCena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel23)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtAcompananteCena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(4, 4, 4)
+                                .addComponent(imgDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)
+                                .addGap(3, 3, 3)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtColacionComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel18)
+                                .addGap(3, 3, 3)
+                                .addComponent(txtColacionCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnCancelar)
-                                    .addComponent(btnGuardar))
-                                .addGap(15, 15, 15))))))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel12)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(imgCena, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel22)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(txtNumCaloriasCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)
+                        .addGap(4, 4, 4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumCaloriasDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(txtNumCaloriasComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -401,13 +567,11 @@ public class agregarDieta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,65 +580,142 @@ public class agregarDieta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(agregarDieta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(agregarDieta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(agregarDieta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(agregarDieta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void comboDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboDiaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new agregarDieta().setVisible(true);
+    private void imgDesayunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgDesayunoMousePressed
+        myImgDesayuno = insertarImagen(imgDesayuno);
+    }//GEN-LAST:event_imgDesayunoMousePressed
+
+    private void imgComidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgComidaMousePressed
+        myImgComida = insertarImagen(imgComida);
+    }//GEN-LAST:event_imgComidaMousePressed
+
+    private void imgCenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgCenaMousePressed
+        myImgCena = insertarImagen(imgCena);
+    }//GEN-LAST:event_imgCenaMousePressed
+
+    private void fechaInicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_fechaInicioPropertyChange
+
+        try {
+            Date fechaSeleccionada = fechaInicio.getDate();
+            // Calcular una semana después de la fecha seleccionada
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaSeleccionada);
+            calendar.add(Calendar.WEEK_OF_YEAR, 1);
+
+            fechaFinal.setDate(calendar.getTime());
+        } catch (NullPointerException e) {
+
+        }
+    }//GEN-LAST:event_fechaInicioPropertyChange
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombreDieta = txtNombreDieta.getText();
+        Date myFechaInicio = fechaInicio.getDate();
+        Date myFechaFinal = fechaFinal.getDate();
+
+        int diaSemana = Integer.parseInt(comboDia.getSelectedItem().toString().substring(4));
+
+        String nombreDesayuno = txtNombreDesayuno.getText();
+        String nombreComida = txtNombreComida.getText();
+        String nombreCena = txtNombreCena.getText();
+
+        String ingredientesDesayuno = txtIngredientesDesayuno.getText();
+        String ingredientesComida = txtIngredientesDesayuno.getText();
+        String ingredientesCena = txtIngredientesCena.getText();
+
+        String acompañanteDesayuno = txtAcompañanteDesayuno.getText();
+        String acompañanteComida = txtAcompañanteDesayuno.getText();
+        String acompañanteCena = txtAcompañanteCena.getText();
+
+        String colacionDesayuno = txtColacionDesayuno.getText();
+        String colacionComida = txtColacionComida.getText();
+
+        Desayuno desayuno = new Desayuno(nombreDesayuno, ingredientesDesayuno, acompañanteDesayuno,
+                Integer.parseInt(txtNumCaloriasDesayuno.getText()), myImgDesayuno, colacionDesayuno);
+
+        Comida comida = new Comida(nombreComida, ingredientesComida, acompañanteComida,
+                Integer.parseInt(txtNumCaloriasComida.getText()), myImgComida, colacionComida);
+
+        Cena cena = new Cena(nombreCena, ingredientesCena, acompañanteCena,
+                Integer.parseInt(txtNumCaloriasCena.getText()), myImgCena);
+
+        Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
+
+        if(persistenciaFachada.registrarDieta(dieta)){
+            JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
+                    "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtNumCaloriasCenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCaloriasCenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumCaloriasCenaActionPerformed
+
+    public byte[] insertarImagen(JLabel label) {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(new File(selectedFile.getAbsolutePath()));
+            } catch (IOException ex) {
+                Logger.getLogger(agregarDieta.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+            Image scaledImage = image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(scaledImage);
+            label.setIcon(icon);
+
+            try {
+                return iconToBytes(new ImageIcon(selectedFile.getAbsolutePath()));
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+        }
+        return null;
+    }
+
+    public static byte[] iconToBytes(Icon icon) throws IOException {
+        BufferedImage bufferedImage = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        icon.paintIcon(null, bufferedImage.getGraphics(), 0, 0);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "jpg", outputStream);
+        return outputStream.toByteArray();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
-    private javax.swing.JComboBox<String> NumDieta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btn_más;
-    private javax.swing.JButton btn_más2;
-    private javax.swing.JButton btn_más3;
+    private javax.swing.JComboBox<String> comboDia;
     private com.toedter.calendar.JDateChooser fechaFinal;
-    private com.toedter.calendar.JDateChooser fechaInicio1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JDateChooser fechaInicio;
+    private javax.swing.JLabel imgCena;
+    private javax.swing.JLabel imgComida;
+    private javax.swing.JLabel imgDesayuno;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -484,23 +725,33 @@ public class agregarDieta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lblFotoCena;
-    private javax.swing.JLabel lblFotoComida;
-    private javax.swing.JLabel lblFotoDesayuno;
-    private javax.swing.JTextField txtAcompananteCena;
-    private javax.swing.JTextField txtAcompananteComida;
-    private javax.swing.JTextField txtAcompananteDesayuno;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel lblNombreNutriologo1;
+    private javax.swing.JTextArea txtAcompañanteCena;
+    private javax.swing.JTextArea txtAcompañanteComida;
+    private javax.swing.JTextArea txtAcompañanteDesayuno;
+    private javax.swing.JTextField txtColacionCena;
     private javax.swing.JTextField txtColacionComida;
     private javax.swing.JTextField txtColacionDesayuno;
-    private javax.swing.JTextField txtIngedientesCena;
-    private javax.swing.JTextField txtIngedientesComida;
-    private javax.swing.JTextField txtIngedientesDesayuno;
+    private javax.swing.JTextArea txtIngredientesCena;
+    private javax.swing.JTextArea txtIngredientesComida;
+    private javax.swing.JTextArea txtIngredientesDesayuno;
     private javax.swing.JTextField txtNombreCena;
     private javax.swing.JTextField txtNombreComida;
     private javax.swing.JTextField txtNombreDesayuno;
-    private javax.swing.JTextField txtNombrePaciente;
+    private javax.swing.JTextField txtNombreDieta;
+    private javax.swing.JTextField txtNumCaloriasCena;
+    private javax.swing.JTextField txtNumCaloriasComida;
+    private javax.swing.JTextField txtNumCaloriasDesayuno;
     // End of variables declaration//GEN-END:variables
 }

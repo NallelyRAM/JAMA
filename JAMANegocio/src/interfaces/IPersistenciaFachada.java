@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import dominio.Dieta;
 import dominio.Paciente;
 import java.util.ArrayList;
 
@@ -25,6 +26,17 @@ public interface IPersistenciaFachada {
     public ArrayList<Paciente> buscarPacientes();
 
     public Paciente buscarPacientePorID(int id);
+    
+    // Dietas .........
+    public boolean registrarDieta(Dieta dieta);
+    
+    public boolean eliminarDieta(int id);
+    
+    public boolean actualizarDieta(int id, Dieta dieta);
+
+    public ArrayList<Dieta> buscarDietas();
+
+    public Dieta buscarDietaPorID(int id);
     
     // ...
     

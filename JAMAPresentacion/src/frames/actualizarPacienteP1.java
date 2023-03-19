@@ -92,6 +92,11 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -157,12 +162,12 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(21, 21, 21))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(179, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addGap(54, 54, 54)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addGap(49, 49, 49)
                         .addComponent(btnSiguiente)
                         .addGap(107, 107, 107))
@@ -214,7 +219,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
                     .addComponent(btnCancelar)
                     .addComponent(btnSiguiente)
                     .addComponent(btnActualizar))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 153));
@@ -304,6 +309,20 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtTelefono.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
     private boolean validacion() {
         if (txtNombre.getText().equals("")
                 || txtEmail.getText().equals("")
@@ -338,7 +357,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Correo inválido, favor de ingresar nuevamente.");
             this.txtEmail.setText("");
         }
-        
+
         return true;
     }
 

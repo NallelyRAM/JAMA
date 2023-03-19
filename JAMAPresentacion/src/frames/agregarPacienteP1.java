@@ -4,6 +4,7 @@
  */
 package frames;
 
+import dominio.Dieta;
 import dominio.Paciente;
 import dominio.Persona;
 import interfaces.IPersistenciaFachada;
@@ -22,6 +23,7 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
 
     static IPersistenciaFachada persistenciaFachada;
     Paciente paciente;
+    Dieta dieta;
     agregarPacienteP2 ap2;
 
     /**
@@ -55,11 +57,12 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         comboSexo = new javax.swing.JComboBox<>();
         txtTelefono = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        boxDieta = new javax.swing.JCheckBox();
         btnSiguiente = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         dateChooser = new com.toedter.calendar.JDateChooser();
+        btnLimpiar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
 
@@ -105,17 +108,13 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         comboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
 
         txtTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        boxDieta.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        boxDieta.setText("Dieta");
-        boxDieta.setToolTipText("");
-        boxDieta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxDietaActionPerformed(evt);
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
             }
         });
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         btnSiguiente.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnSiguiente.setText("Siguiente");
@@ -141,19 +140,22 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
             }
         });
 
+        btnLimpiar1.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        btnLimpiar1.setText("Agregar Dieta");
+        btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Si desea dieta...");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(btnCancelar)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnLimpiar)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnSiguiente))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -169,11 +171,23 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
                             .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(boxDieta)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(dateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE)))))
+                                .addComponent(comboSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, 150, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(btnCancelar)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnLimpiar)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnSiguiente)))
                 .addContainerGap(101, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(4, 4, 4)
+                .addComponent(btnLimpiar1)
+                .addGap(243, 243, 243))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +216,11 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(boxDieta)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar1)
+                    .addComponent(jLabel1))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnCancelar)
@@ -261,10 +277,6 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void boxDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxDietaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxDietaActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
     }//GEN-LAST:event_formWindowClosing
@@ -298,6 +310,9 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
                             
                             dispose();
                             Paciente myPaciente = new Paciente();
+                            
+                            
+                            
                             ap2 = new agregarPacienteP2(myPaciente, persona);
                             
                         } else {
@@ -324,6 +339,24 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         btnLimpiar();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros) {
+            evt.consume();
+        }
+
+        if (txtTelefono.getText().trim().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     public static void guardarCambios(Paciente myPaciente, Persona persona) {
 
@@ -375,12 +408,13 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
-    private javax.swing.JCheckBox boxDieta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> comboSexo;
     private com.toedter.calendar.JDateChooser dateChooser;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -275,6 +275,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al registrar los datos, llenelos e intentelo de nuevo.");
+            System.out.println(e);
             btnLimpiar();
         }
 

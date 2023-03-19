@@ -11,25 +11,36 @@ import java.util.Date;
  * @author Usuario
  */
 public class Dieta {
-    public int idDieta;
-    public Paciente nombrePaciente;
-    public int numDieta;
-    public Date fechaInicio;
-    public Date fechaFinal;
-    public int diaSemana;
-    public Platillo categoria;
+    
+    private int idDieta;
+    private String nombreDieta;
+    private Date fechaInicio;
+    private Date fechaFinal;
+    private int diaSemana;
+    private Desayuno desayuno;
+    private Comida comida;
+    private Cena cena;
+    
 
     public Dieta() {
     }
 
-    public Dieta(int idDieta, Paciente nombrePaciente, int numDieta, Date fechaInicio, Date fechaFinal, int diaSemana, Platillo categoria) {
-        this.idDieta = idDieta;
-        this.nombrePaciente = nombrePaciente;
-        this.numDieta = numDieta;
+    public Dieta(String nombreDieta, Date fechaInicio, Date fechaFinal, int diaSemana, Desayuno desayuno, Comida comida, Cena cena) {
+        this.nombreDieta = nombreDieta;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.diaSemana = diaSemana;
-        this.categoria = categoria;
+        this.desayuno = desayuno;
+        this.comida = comida;
+        this.cena = cena;
+    }
+
+    public String getNombreDieta() {
+        return nombreDieta;
+    }
+
+    public void setNombreDieta(String nombreDieta) {
+        this.nombreDieta = nombreDieta;
     }
 
     public int getIdDieta() {
@@ -38,22 +49,6 @@ public class Dieta {
 
     public void setIdDieta(int idDieta) {
         this.idDieta = idDieta;
-    }
-
-    public Paciente getNombrePaciente() {
-        return nombrePaciente;
-    }
-
-    public void setNombrePaciente(Paciente nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
-    }
-
-    public int getNumDieta() {
-        return numDieta;
-    }
-
-    public void setNumDieta(int numDieta) {
-        this.numDieta = numDieta;
     }
 
     public Date getFechaInicio() {
@@ -80,13 +75,34 @@ public class Dieta {
         this.diaSemana = diaSemana;
     }
 
-    public Platillo getCategoria() {
-        return categoria;
+    public Desayuno getDesayuno() {
+        return desayuno;
     }
 
-    public void setCategoria(Platillo categoria) {
-        this.categoria = categoria;
+    public void setDesayuno(Desayuno desayuno) {
+        this.desayuno = desayuno;
     }
-    
+
+    public Comida getComida() {
+        return comida;
+    }
+
+    public void setComida(Comida comida) {
+        this.comida = comida;
+    }
+
+    public Cena getCena() {
+        return cena;
+    }
+
+    public void setCena(Cena cena) {
+        this.cena = cena;
+    }
+
+    @Override
+    public String toString() {
+        return "Dieta{" + "idDieta=" + idDieta + ", nombreDieta=" + nombreDieta + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + ", diaSemana=" + diaSemana + ", desayuno=" + desayuno + ", comida=" + comida + ", cena=" + cena + '}';
+    }
+
     
 }

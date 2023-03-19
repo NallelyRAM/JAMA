@@ -5,8 +5,10 @@
  */
 package Persistencia;
 
+import dominio.Dieta;
 import factory.DAOSFactory;
 import dominio.Paciente;
+import interfaces.IDietasDAO;
 import interfaces.IPacientesDAO;
 import interfaces.IPersistencia;
 import java.sql.SQLException;
@@ -19,11 +21,14 @@ import java.util.ArrayList;
 public class Persistencia implements IPersistencia{
     
     IPacientesDAO pacientesDAO;
+    IDietasDAO dietasDAO;
+    
     
     private static Persistencia persistencia;
     
     public Persistencia() throws SQLException{
         pacientesDAO = DAOSFactory.crearPacientesDAO();
+        dietasDAO = DAOSFactory.crearDietasDAO();
     }
     
     public static Persistencia getInstance() throws SQLException{
@@ -31,6 +36,7 @@ public class Persistencia implements IPersistencia{
         return persistencia;
     }
     
+    // Pacientes ...
     @Override
     public boolean agregarPaciente(Paciente paciente) {
         return pacientesDAO.agregar(paciente);
@@ -47,7 +53,7 @@ public class Persistencia implements IPersistencia{
     }
 
     @Override
-    public Paciente consultarPorID(int id) {
+    public Paciente consultarPorIDPaciente(int id) {
         return pacientesDAO.consultarPorID(id);
     }
 
@@ -57,8 +63,40 @@ public class Persistencia implements IPersistencia{
     }
 
     @Override
-    public Paciente consultarPorNombre(String nombre) {
+    public Paciente consultarPorNombrePaciente(String nombre) {
         return pacientesDAO.consultarPorNombre(nombre);
+    }
+    
+    
+    // Dietas ...
+    @Override
+    public boolean agregarDieta(Dieta dieta) {
+        return dietasDAO.agregar(dieta);
+    }
+
+    @Override
+    public boolean actualizarDieta(int id, Dieta dieta) {
+        return dietasDAO.actualizar(id, dieta);
+    }
+
+    @Override
+    public boolean eliminarDieta(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Dieta consultarPorIDDieta(int id) {
+        return dietasDAO.consultarPorID(id);
+    }
+
+    @Override
+    public ArrayList<Dieta> buscarDietas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Dieta consultarPorNombreDieta(String nombre) {
+        return dietasDAO.consultarPorNombre(nombre);
     }
     
 }

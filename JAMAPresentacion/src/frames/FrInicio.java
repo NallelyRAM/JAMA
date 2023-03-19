@@ -34,10 +34,11 @@ public class FrInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jbAgregarPaciente = new javax.swing.JButton();
+        btnAgregarPaciente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jbActualizarPaciente = new javax.swing.JButton();
+        btnActualizarPaciente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnAgregarDieta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
 
@@ -47,20 +48,20 @@ public class FrInicio extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 153));
 
-        jbAgregarPaciente.setText("Agregar paciente");
-        jbAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarPaciente.setText("Agregar paciente");
+        btnAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarPacienteActionPerformed(evt);
+                btnAgregarPacienteActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 24)); // NOI18N
         jLabel1.setText("Menu");
 
-        jbActualizarPaciente.setText("Actualizar paciente");
-        jbActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarPaciente.setText("Actualizar paciente");
+        btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarPacienteActionPerformed(evt);
+                btnActualizarPacienteActionPerformed(evt);
             }
         });
 
@@ -72,6 +73,13 @@ public class FrInicio extends javax.swing.JFrame {
             }
         });
 
+        btnAgregarDieta.setText("Agregar Dieta");
+        btnAgregarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarDietaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -79,10 +87,11 @@ public class FrInicio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAgregarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -91,10 +100,12 @@ public class FrInicio extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(jbAgregarPaciente)
+                .addComponent(btnAgregarPaciente)
                 .addGap(28, 28, 28)
-                .addComponent(jbActualizarPaciente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+                .addComponent(btnActualizarPaciente)
+                .addGap(28, 28, 28)
+                .addComponent(btnAgregarDieta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(49, 49, 49))
         );
@@ -139,25 +150,33 @@ public class FrInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPacienteActionPerformed
+    private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         try {
             agregarPacienteP1 nuevoPaciente = new agregarPacienteP1();
         } catch (SQLException ex) {
             Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbAgregarPacienteActionPerformed
+    }//GEN-LAST:event_btnAgregarPacienteActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jbActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarPacienteActionPerformed
+    private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
        try {
             actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
         } catch (SQLException ex) {
             Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbActualizarPacienteActionPerformed
+    }//GEN-LAST:event_btnActualizarPacienteActionPerformed
+
+    private void btnAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDietaActionPerformed
+        try {
+            new agregarDieta().setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_btnAgregarDietaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,11 +215,12 @@ public class FrInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton btnActualizarPaciente;
+    private javax.swing.JButton btnAgregarDieta;
+    private javax.swing.JButton btnAgregarPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton jbActualizarPaciente;
-    private javax.swing.JButton jbAgregarPaciente;
     // End of variables declaration//GEN-END:variables
 }

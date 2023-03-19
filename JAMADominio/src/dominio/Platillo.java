@@ -4,23 +4,41 @@
  */
 package dominio;
 
+
 /**
  *
  * @author Usuario
  */
 public class Platillo {
-    public String nombre;
-    public String ingredientes;
-    public String acompanante;
-    public float numCalorias;
-    public byte foto;
+
+    private int id;
+    private String nombre;
+    private String ingredientes;
+    private String acompanante;
+    private int numCalorias;
+    private byte[] foto;
+    
+    
 
     public Platillo() {
     }
-    
-    //FALTA CONSTRUCTOR CON TODAS LAS VARIABLES
 
-    //NO HAY GET Y SET DE FOTO 
+    public Platillo(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto) {
+        this.nombre = nombre;
+        this.ingredientes = ingredientes;
+        this.acompanante = acompanante;
+        this.numCalorias = numCalorias;
+        this.foto = foto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -45,14 +63,24 @@ public class Platillo {
         this.acompanante = acompanante;
     }
 
-    public float getNumCalorias() {
+    public int getNumCalorias() {
         return numCalorias;
     }
 
-    public void setNumCalorias(float numCalorias) {
+    public void setNumCalorias(int numCalorias) {
         this.numCalorias = numCalorias;
     }
-    
-    
-    
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    @Override
+    public String toString() {
+        return "Platillo{" + "id=" + id + ", nombre=" + nombre + ", ingredientes=" + ingredientes + ", acompanante=" + acompanante + ", numCalorias=" + numCalorias + ", foto=" + foto + '}';
+    }
 }

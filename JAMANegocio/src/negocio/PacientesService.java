@@ -38,7 +38,7 @@ public class PacientesService implements IPacientesService {
 
     @Override
     public Paciente buscarPacientePorID(int id) {
-        return persistencia.consultarPorID(id);
+        return persistencia.consultarPorIDPaciente(id);
     }
 
     
@@ -62,7 +62,7 @@ public class PacientesService implements IPacientesService {
     
     @Override
     public boolean validar(int id) {
-        Paciente paciente = persistencia.consultarPorID(id);
+        Paciente paciente = persistencia.consultarPorIDPaciente(id);
         return paciente == null;
     }
 

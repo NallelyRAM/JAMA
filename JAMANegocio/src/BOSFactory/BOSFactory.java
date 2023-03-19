@@ -5,8 +5,10 @@
  */
 package BOSFactory;
 
+import interfaces.IDietasService;
 import interfaces.IPacientesService;
 import java.sql.SQLException;
+import negocio.DietasService;
 import negocio.PacientesService;
 
 /**
@@ -17,6 +19,10 @@ public class BOSFactory {
     
     public static IPacientesService crearPacientesService() throws SQLException {
         return new PacientesService();
+    }
+    
+    public static IDietasService crearDietasService() throws SQLException {
+        return new DietasService();
     }
     
     // ...

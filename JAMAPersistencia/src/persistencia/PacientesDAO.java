@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,23 +51,24 @@ public class PacientesDAO implements IPacientesDAO {
             pstmtPersona.setString(6, paciente.getEmail());
             pstmtPersona.executeUpdate();
 
-            
-            
+            int idDieta = paciente.getDieta() != null ? paciente.getDieta().getIdDieta() : 0;
+
             // Obtener el ID del registro de persona recién creado
             try (ResultSet rs = pstmtPersona.getGeneratedKeys()) {
                 if (rs.next()) {
                     int idPersona = rs.getInt(1);
                     // Insertar un registro en la tabla paciente con una referencia al registro de persona recién creado
-                    String sqlPaciente = "INSERT INTO paciente (motivoConsulta, idPersona) VALUES (?, ?)";
+                    String sqlPaciente = "INSERT INTO paciente (motivoConsulta, idDieta, idPersona) VALUES (?, ?, ?)";
                     try (PreparedStatement pstmtPaciente = baseDatos.prepareStatement(sqlPaciente)) {
                         pstmtPaciente.setString(1, paciente.getMotivoConsulta());
-                        pstmtPaciente.setInt(2, idPersona);
+                        pstmtPaciente.setObject(2, idDieta != 0 ? idDieta : null);
+                        pstmtPaciente.setInt(3, idPersona);
                         pstmtPaciente.executeUpdate();
                     }
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         try {
@@ -74,7 +76,7 @@ public class PacientesDAO implements IPacientesDAO {
             baseDatos.commit();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return false;
     }
@@ -87,24 +89,25 @@ public class PacientesDAO implements IPacientesDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-             // Actualizar un registro en la tabla persona
+
+        // Actualizar un registro en la tabla persona
         try {
-            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ? WHERE idPaciente = ?";
+            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ?, idDieta = ? WHERE idPaciente = ?";
             PreparedStatement sentenciaPaciente = baseDatos.prepareStatement(consultaPaciente);
             sentenciaPaciente.setString(1, paciente.getMotivoConsulta());
-            sentenciaPaciente.setInt(2, id);
-            
+            sentenciaPaciente.setInt(2, paciente.getDieta().getIdDieta());
+            sentenciaPaciente.setInt(3, id);
+
             sentenciaPaciente.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-                  
-        try {  
+
+        try {
             String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE idPersona = ?";
             PreparedStatement sentenciaPersona = baseDatos.prepareStatement(consultaPersona);
             sentenciaPersona.setString(1, paciente.getNombre());
-            sentenciaPersona.setInt(2,paciente.getEdad());
+            sentenciaPersona.setInt(2, paciente.getEdad());
             sentenciaPersona.setString(3, paciente.getSexo());
             sentenciaPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
             sentenciaPersona.setString(5, paciente.getEmail());
@@ -115,7 +118,7 @@ public class PacientesDAO implements IPacientesDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             // Confirmar la transacción
             baseDatos.commit();

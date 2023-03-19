@@ -8,8 +8,10 @@ package factory;
 import Persistencia.ConexionBD;
 import Persistencia.PacientesDAO;
 import interfaces.IConexionBD;
+import interfaces.IDietasDAO;
 import interfaces.IPacientesDAO;
 import java.sql.SQLException;
+import persistencia.DietasDAO;
 
 /**
  *
@@ -21,6 +23,10 @@ public class DAOSFactory {
     
     public static IPacientesDAO crearPacientesDAO() throws SQLException{
         return new PacientesDAO(CONEXIONBD);
+    }
+    
+    public static IDietasDAO crearDietasDAO() throws SQLException{
+        return new DietasDAO(CONEXIONBD);
     }
     
     // ...
