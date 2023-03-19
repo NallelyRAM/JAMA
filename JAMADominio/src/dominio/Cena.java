@@ -17,4 +17,14 @@ public class Cena extends Platillo{
         super(nombre, ingredientes, acompanante, numCalorias, foto);
     }
     
+    @Override
+    public String toString() {
+        return "Cena ["
+                + "nombre=" + getNombre()
+                + ", ingredientes=" + getIngredientes()
+                + ", acompañante=" + getAcompanante()
+                + ", numCalorias=" + getNumCalorias()
+                + ", foto=" + getFoto()
+                + "]";
+    }
 }

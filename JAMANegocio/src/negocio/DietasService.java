@@ -23,7 +23,6 @@ public class DietasService implements IDietasService {
 
     @Override
     public boolean registrarDieta(Dieta dieta) {
-        //if (validar(dieta.getIdDieta())) {
         return persistencia.agregarDieta(dieta);
 
     }

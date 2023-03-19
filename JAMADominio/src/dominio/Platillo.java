@@ -4,7 +4,6 @@
  */
 package dominio;
 
-
 /**
  *
  * @author Usuario
@@ -17,13 +16,20 @@ public class Platillo {
     private String acompanante;
     private int numCalorias;
     private byte[] foto;
-    
-    
 
     public Platillo() {
     }
 
     public Platillo(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto) {
+        this.nombre = nombre;
+        this.ingredientes = ingredientes;
+        this.acompanante = acompanante;
+        this.numCalorias = numCalorias;
+        this.foto = foto;
+    }
+
+    public Platillo(int id, String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto) {
+        this.id = id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.acompanante = acompanante;
@@ -81,6 +87,14 @@ public class Platillo {
 
     @Override
     public String toString() {
-        return "Platillo{" + "id=" + id + ", nombre=" + nombre + ", ingredientes=" + ingredientes + ", acompanante=" + acompanante + ", numCalorias=" + numCalorias + ", foto=" + foto + '}';
+        return "Platillo ["
+                + "id=" + id
+                + ", nombre=" + nombre
+                + ", ingredientes=" + ingredientes
+                + ", acompañante=" + acompanante
+                + ", numCalorias=" + numCalorias
+                + ", foto=" + foto
+                + "]";
     }
+
 }

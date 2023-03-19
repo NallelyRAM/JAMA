@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Usuario
  */
 public class Dieta {
-    
+
     private int idDieta;
     private String nombreDieta;
     private Date fechaInicio;
@@ -20,7 +20,6 @@ public class Dieta {
     private Desayuno desayuno;
     private Comida comida;
     private Cena cena;
-    
 
     public Dieta() {
     }
@@ -101,8 +100,15 @@ public class Dieta {
 
     @Override
     public String toString() {
-        return "Dieta{" + "idDieta=" + idDieta + ", nombreDieta=" + nombreDieta + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + ", diaSemana=" + diaSemana + ", desayuno=" + desayuno + ", comida=" + comida + ", cena=" + cena + '}';
+        return "Dieta{"
+                + "nombreDieta='" + nombreDieta + '\''
+                + ", fechaInicio=" + fechaInicio
+                + ", fechaFinal=" + fechaFinal
+                + ", diaSemana=" + diaSemana
+                + ",\n\t desayuno=" + desayuno.toString().replace("\n", "\n\t\t")
+                + ",\n\t comida=" + comida.toString().replace("\n", "\n\t\t")
+                + ",\n\t cena=" + cena.toString().replace("\n", "\n\t\t")
+                + "}\n\n";
     }
 
-    
 }

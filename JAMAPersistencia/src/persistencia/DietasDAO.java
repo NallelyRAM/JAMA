@@ -5,8 +5,12 @@
  */
 package persistencia;
 
+import dominio.Cena;
+import dominio.Comida;
+import dominio.Desayuno;
 import dominio.Dieta;
 import dominio.Paciente;
+import dominio.Platillo;
 import interfaces.IConexionBD;
 import interfaces.IDietasDAO;
 import java.sql.Connection;
@@ -15,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,11 +108,11 @@ public class DietasDAO implements IDietasDAO {
                     idComida = rs.getInt(1);
                     // Insertar un registro en la tabla desayuno con una referencia al registro de platillo recién creado
                     String sqlComida = "INSERT INTO comida (colacion, idPlatillo) VALUES (?, ?)";
-                    try (PreparedStatement pstmtComida = baseDatos.prepareStatement(sqlComida,Statement.RETURN_GENERATED_KEYS)) {
+                    try (PreparedStatement pstmtComida = baseDatos.prepareStatement(sqlComida, Statement.RETURN_GENERATED_KEYS)) {
                         pstmtComida.setString(1, dieta.getComida().getColacion());
                         pstmtComida.setInt(2, idComida);
                         pstmtComida.executeUpdate();
-                        
+
                         try (ResultSet rsComida = pstmtComida.getGeneratedKeys()) {
                             if (rsComida.next()) {
                                 idComida = rsComida.getInt(1);
@@ -144,7 +149,7 @@ public class DietasDAO implements IDietasDAO {
                     idCena = rs.getInt(1);
                     // Insertar un registro en la tabla desayuno con una referencia al registro de platillo recién creado
                     String sqlComida = "INSERT INTO cena (idPlatillo) VALUES (?)";
-                    try (PreparedStatement pstmtCena = baseDatos.prepareStatement(sqlComida,Statement.RETURN_GENERATED_KEYS)) {
+                    try (PreparedStatement pstmtCena = baseDatos.prepareStatement(sqlComida, Statement.RETURN_GENERATED_KEYS)) {
                         pstmtCena.setInt(1, idCena);
                         pstmtCena.executeUpdate();
                         try (ResultSet rsCena = pstmtCena.getGeneratedKeys()) {
@@ -241,40 +246,267 @@ public class DietasDAO implements IDietasDAO {
 
     @Override
     public Dieta consultarPorID(int id) {
-        Paciente paciente = null;
-        String sql = "SELECT p.idPersona, p.nombre, p.sexo, p.fechaNacimiento, p.telefono, p.email, "
-                + "pa.idPaciente, pa.motivoConsulta "
-                + "FROM Persona p "
-                + "JOIN Paciente pa ON p.idPersona = pa.idPersona "
-                + "WHERE pa.idPaciente = ?;";
-        try {
-            PreparedStatement pstmt = baseDatos.prepareStatement(sql);
 
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                paciente = new Paciente();
-                paciente.setIdPersona(rs.getInt("idPersona"));
-                paciente.setNombre(rs.getString("nombre"));
-                paciente.setSexo(rs.getString("sexo"));
-                paciente.setFechaNacimiento(rs.getDate("fechaNacimiento"));
-                paciente.setTelefono(rs.getString("telefono"));
-                paciente.setEmail(rs.getString("email"));
-                paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setMotivoConsulta(rs.getString("motivoConsulta"));
-//                paciente.setPeso(rs.getFloat("peso"));
-//                paciente.setEstatura(rs.getFloat("estatura"));
-//                paciente.setTalla(rs.getFloat("talla"));
+        String query = "SELECT * FROM dieta WHERE idDieta = ?";
+
+        try {
+            PreparedStatement statement = baseDatos.prepareStatement(query);
+            statement.setInt(1, id);
+            // Ejecutar la consulta y obtener los resultados
+            ResultSet resultado = statement.executeQuery();
+            // Procesar los resultados
+            while (resultado.next()) {
+                // Obtener los valores de cada columna
+                String nombreDieta = resultado.getString("nombre");
+                Date fechaInicio = resultado.getDate("fechaInicio");
+                Date fechaFinal = resultado.getDate("fechaFinal");
+                int diaSemana = resultado.getInt("diaSemana");
+
+                int idDesayuno = resultado.getInt("idDesayuno");
+                int idComida = resultado.getInt("idComida");
+                int idCena = resultado.getInt("idCena");
+
+                String queryDesayuno = "SELECT * FROM desayuno WHERE idDesayuno = ?";
+
+                PreparedStatement statementDesayuno = baseDatos.prepareStatement(queryDesayuno);
+                statementDesayuno.setInt(1, idDesayuno);
+                ResultSet resultadoDesayuno = statementDesayuno.executeQuery();
+                // Procesar los resultados
+                Desayuno desayuno = new Desayuno();
+                int idPlatillo = 0;
+                String colacion = "";
+                while (resultadoDesayuno.next()) {
+                    idPlatillo = resultadoDesayuno.getInt("idPlatillo");
+                    colacion = resultadoDesayuno.getString("colacion");
+
+                }
+
+                queryDesayuno = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatillo = baseDatos.prepareStatement(queryDesayuno);
+                statementPlatillo.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillos = statementPlatillo.executeQuery();
+                // Procesar los resultados
+                Platillo platillo = new Platillo();
+                while (resultadoPlatillos.next()) {
+                    String nombre = resultadoPlatillos.getString("nombre");
+                    String ingredientes = resultadoPlatillos.getString("ingredientes");
+                    String acompañante = resultadoPlatillos.getString("acompañante");
+                    int numCalorias = resultadoPlatillos.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillos.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                desayuno = new Desayuno(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto(), colacion);
+
+                String queryComida = "SELECT * FROM comida WHERE idComida = ?";
+
+                PreparedStatement statementComida = baseDatos.prepareStatement(queryComida);
+                statementComida.setInt(1, idComida);
+                ResultSet resultadoComida = statementComida.executeQuery();
+                // Procesar los resultados
+                Comida comida = new Comida();
+                idPlatillo = 0;
+                colacion = "";
+                while (resultadoComida.next()) {
+                    idPlatillo = resultadoComida.getInt("idPlatillo");
+                    colacion = resultadoComida.getString("colacion");
+
+                }
+
+                queryComida = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatilloComida = baseDatos.prepareStatement(queryComida);
+                statementPlatilloComida.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillosComidas = statementPlatilloComida.executeQuery();
+                // Procesar los resultados
+                platillo = new Platillo();
+                while (resultadoPlatillosComidas.next()) {
+                    String nombre = resultadoPlatillosComidas.getString("nombre");
+                    String ingredientes = resultadoPlatillosComidas.getString("ingredientes");
+                    String acompañante = resultadoPlatillosComidas.getString("acompañante");
+                    int numCalorias = resultadoPlatillosComidas.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillosComidas.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                comida = new Comida(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto(), colacion);
+
+                String queryCena = "SELECT * FROM cena WHERE idCena = ?";
+
+                PreparedStatement statementCena = baseDatos.prepareStatement(queryCena);
+                statementCena.setInt(1, idCena);
+                ResultSet resultadoCena = statementCena.executeQuery();
+                // Procesar los resultados
+                Cena cena = new Cena();
+                idPlatillo = 0;
+                colacion = "";
+                while (resultadoCena.next()) {
+                    idPlatillo = resultadoCena.getInt("idPlatillo");
+                }
+
+                queryDesayuno = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatilloCena = baseDatos.prepareStatement(queryDesayuno);
+                statementPlatilloCena.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillosCena = statementPlatilloCena.executeQuery();
+                // Procesar los resultados
+                platillo = new Platillo();
+                while (resultadoPlatillosCena.next()) {
+                    String nombre = resultadoPlatillosCena.getString("nombre");
+                    String ingredientes = resultadoPlatillosCena.getString("ingredientes");
+                    String acompañante = resultadoPlatillosCena.getString("acompañante");
+                    int numCalorias = resultadoPlatillosCena.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillosCena.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                cena = new Cena(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto());
+
+                return new Dieta(nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
-        return paciente;
+
+        return null;
+
     }
 
     @Override
     public ArrayList<Dieta> consultarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        ArrayList<Dieta> dietas = new ArrayList<>();
+
+        String query = "SELECT * FROM dieta";
+
+        try {
+            PreparedStatement statement = baseDatos.prepareStatement(query);
+
+            // Ejecutar la consulta y obtener los resultados
+            ResultSet resultado = statement.executeQuery();
+            // Procesar los resultados
+            while (resultado.next()) {
+                // Obtener los valores de cada columna
+                String nombreDieta = resultado.getString("nombre");
+                Date fechaInicio = resultado.getDate("fechaInicio");
+                Date fechaFinal = resultado.getDate("fechaFinal");
+                int diaSemana = resultado.getInt("diaSemana");
+
+                int idDesayuno = resultado.getInt("idDesayuno");
+                int idComida = resultado.getInt("idComida");
+                int idCena = resultado.getInt("idCena");
+
+                String queryDesayuno = "SELECT * FROM desayuno WHERE idDesayuno = ?";
+
+                PreparedStatement statementDesayuno = baseDatos.prepareStatement(queryDesayuno);
+                statementDesayuno.setInt(1, idDesayuno);
+                ResultSet resultadoDesayuno = statementDesayuno.executeQuery();
+                // Procesar los resultados
+                Desayuno desayuno = new Desayuno();
+                int idPlatillo = 0;
+                String colacion = "";
+                while (resultadoDesayuno.next()) {
+                    idPlatillo = resultadoDesayuno.getInt("idPlatillo");
+                    colacion = resultadoDesayuno.getString("colacion");
+
+                }
+
+                queryDesayuno = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatillo = baseDatos.prepareStatement(queryDesayuno);
+                statementPlatillo.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillos = statementPlatillo.executeQuery();
+                // Procesar los resultados
+                Platillo platillo = new Platillo();
+                while (resultadoPlatillos.next()) {
+                    String nombre = resultadoPlatillos.getString("nombre");
+                    String ingredientes = resultadoPlatillos.getString("ingredientes");
+                    String acompañante = resultadoPlatillos.getString("acompañante");
+                    int numCalorias = resultadoPlatillos.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillos.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                desayuno = new Desayuno(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto(), colacion);
+
+                String queryComida = "SELECT * FROM comida WHERE idComida = ?";
+
+                PreparedStatement statementComida = baseDatos.prepareStatement(queryComida);
+                statementComida.setInt(1, idComida);
+                ResultSet resultadoComida = statementComida.executeQuery();
+                // Procesar los resultados
+                Comida comida = new Comida();
+                idPlatillo = 0;
+                colacion = "";
+                while (resultadoComida.next()) {
+                    idPlatillo = resultadoComida.getInt("idPlatillo");
+                    colacion = resultadoComida.getString("colacion");
+
+                }
+
+                queryComida = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatilloComida = baseDatos.prepareStatement(queryComida);
+                statementPlatilloComida.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillosComidas = statementPlatilloComida.executeQuery();
+                // Procesar los resultados
+                platillo = new Platillo();
+                while (resultadoPlatillosComidas.next()) {
+                    String nombre = resultadoPlatillosComidas.getString("nombre");
+                    String ingredientes = resultadoPlatillosComidas.getString("ingredientes");
+                    String acompañante = resultadoPlatillosComidas.getString("acompañante");
+                    int numCalorias = resultadoPlatillosComidas.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillosComidas.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                comida = new Comida(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto(), colacion);
+
+                String queryCena = "SELECT * FROM cena WHERE idCena = ?";
+
+                PreparedStatement statementCena = baseDatos.prepareStatement(queryCena);
+                statementCena.setInt(1, idCena);
+                ResultSet resultadoCena = statementCena.executeQuery();
+                // Procesar los resultados
+                Cena cena = new Cena();
+                idPlatillo = 0;
+                colacion = "";
+                while (resultadoCena.next()) {
+                    idPlatillo = resultadoCena.getInt("idPlatillo");
+                }
+
+                queryDesayuno = "SELECT * FROM platillo WHERE idPlatillo = ?";
+
+                PreparedStatement statementPlatilloCena = baseDatos.prepareStatement(queryDesayuno);
+                statementPlatilloCena.setInt(1, idPlatillo);
+                ResultSet resultadoPlatillosCena = statementPlatilloCena.executeQuery();
+                // Procesar los resultados
+                platillo = new Platillo();
+                while (resultadoPlatillosCena.next()) {
+                    String nombre = resultadoPlatillosCena.getString("nombre");
+                    String ingredientes = resultadoPlatillosCena.getString("ingredientes");
+                    String acompañante = resultadoPlatillosCena.getString("acompañante");
+                    int numCalorias = resultadoPlatillosCena.getInt("numCalorias");
+                    byte[] foto = resultadoPlatillosCena.getBytes("foto");
+                    platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
+                }
+
+                cena = new Cena(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                        platillo.getFoto());
+
+                dietas.add(new Dieta(nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return dietas;
     }
 
     @Override

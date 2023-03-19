@@ -4,18 +4,21 @@
  */
 package dominio;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Usuario
  */
-public class Desayuno extends Platillo{
+public class Desayuno extends Platillo {
+
     public String colacion;
 
     public Desayuno(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
         super(nombre, ingredientes, acompanante, numCalorias, foto);
         this.colacion = colacion;
     }
-    
+
     public Desayuno() {
     }
 
@@ -30,7 +33,17 @@ public class Desayuno extends Platillo{
     public void setColacion(String colacion) {
         this.colacion = colacion;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Desayuno ["
+                + "nombre=" + getNombre()
+                + ", ingredientes=" + getIngredientes()
+                + ", acompañante=" + getAcompanante()
+                + ", numCalorias=" + getNumCalorias()
+                + ", foto=" + getFoto()
+                + ", colacion=" + colacion
+                + "]";
+    }
+
 }

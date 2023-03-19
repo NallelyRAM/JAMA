@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -264,6 +265,11 @@ public class agregarDieta extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -629,11 +635,11 @@ public class agregarDieta extends javax.swing.JFrame {
         String nombreCena = txtNombreCena.getText();
 
         String ingredientesDesayuno = txtIngredientesDesayuno.getText();
-        String ingredientesComida = txtIngredientesDesayuno.getText();
+        String ingredientesComida = txtIngredientesComida.getText();
         String ingredientesCena = txtIngredientesCena.getText();
 
         String acompañanteDesayuno = txtAcompañanteDesayuno.getText();
-        String acompañanteComida = txtAcompañanteDesayuno.getText();
+        String acompañanteComida = txtAcompañanteComida.getText();
         String acompañanteCena = txtAcompañanteCena.getText();
 
         String colacionDesayuno = txtColacionDesayuno.getText();
@@ -649,9 +655,12 @@ public class agregarDieta extends javax.swing.JFrame {
                 Integer.parseInt(txtNumCaloriasCena.getText()), myImgCena);
 
         Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
-
+        
         if(persistenciaFachada.registrarDieta(dieta)){
             JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
+                    "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
                     "Dieta", JOptionPane.INFORMATION_MESSAGE);
         }
         
@@ -660,6 +669,13 @@ public class agregarDieta extends javax.swing.JFrame {
     private void txtNumCaloriasCenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCaloriasCenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumCaloriasCenaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+        
+        
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     public byte[] insertarImagen(JLabel label) {
         JFileChooser fileChooser = new JFileChooser();

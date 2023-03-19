@@ -31,5 +31,15 @@ public class Comida extends Platillo{
         this.colacion = colacion;
     }
     
-    
+    @Override
+    public String toString() {
+        return "Comida ["
+                + "nombre=" + getNombre()
+                + ", ingredientes=" + getIngredientes()
+                + ", acompañante=" + getAcompanante()
+                + ", numCalorias=" + getNumCalorias()
+                + ", foto=" + getFoto()
+                + ", colacion=" + colacion
+                + "]";
+    }
 }
