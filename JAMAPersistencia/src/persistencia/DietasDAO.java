@@ -194,49 +194,7 @@ public class DietasDAO implements IDietasDAO {
 
     @Override
     public boolean actualizar(int id, Dieta dieta) {
-        try {
-            // Deshabilitar el modo de autocommit para permitir la transacción
-            baseDatos.setAutoCommit(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Actualizar un registro en la tabla persona
-        try {
-            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ? WHERE idPaciente = ?";
-            PreparedStatement sentenciaPaciente = baseDatos.prepareStatement(consultaPaciente);
-            sentenciaPaciente.setString(1, paciente.getMotivoConsulta());
-            sentenciaPaciente.setInt(2, id);
-
-            sentenciaPaciente.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE idPersona = ?";
-            PreparedStatement sentenciaPersona = baseDatos.prepareStatement(consultaPersona);
-            sentenciaPersona.setString(1, paciente.getNombre());
-            sentenciaPersona.setInt(2, paciente.getEdad());
-            sentenciaPersona.setString(3, paciente.getSexo());
-            sentenciaPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
-            sentenciaPersona.setString(5, paciente.getEmail());
-            sentenciaPersona.setString(6, paciente.getTelefono());
-            sentenciaPersona.setInt(7, id);
-            sentenciaPersona.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            // Confirmar la transacción
-            baseDatos.commit();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
