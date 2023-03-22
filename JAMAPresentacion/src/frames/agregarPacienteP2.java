@@ -6,6 +6,9 @@ package frames;
 
 import dominio.Paciente;
 import dominio.Persona;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,7 +51,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jbnAtras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -70,16 +73,16 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(867, 618));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/atras1.PNG"))); // NOI18N
-        jButton1.setToolTipText("");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/atras1.PNG"))); // NOI18N
+        jbnAtras.setToolTipText("");
+        jbnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jbnAtrasMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbnAtrasActionPerformed(evt);
             }
         });
 
@@ -159,7 +162,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
                             .addComponent(btnFinalzar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(226, 226, 226)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +176,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jButton1)
+                        .addComponent(jbnAtras)
                         .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -242,30 +245,39 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbnAtrasActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            agregarPacienteP1 agregarPaciente = new agregarPacienteP1();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbnAtrasActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jbnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbnAtrasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jbnAtrasMouseClicked
 
     private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
 
-//        float talla = Float.parseFloat(txtTalla.getText());
-//        float estatura = Float.parseFloat(txtAltura.getText());
-//        float peso = Float.parseFloat(txtPeso.getText());
-//        String motivoConsulta = txtAreaConsulta.getText();
-//        
-//        paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
-//
-//        agregarPacienteP1.guardarCambios(paciente, persona);
-//        dispose();
+        float talla=0, estatura=0, peso = 0;
         try {
             if (validacion()) {
-                float talla = Float.parseFloat(txtTalla.getText());
-                float estatura = Float.parseFloat(txtAltura.getText());
-                float peso = Float.parseFloat(txtPeso.getText());
+                if (Float.parseFloat(txtTalla.getText())%2!=0) {
+                    JOptionPane.showMessageDialog(null, "Error al registar la talla del paciente");
+                }
+                else talla = Float.parseFloat(txtTalla.getText());
+                
+                if (Float.parseFloat(txtAltura.getText())%2!=0) {
+                    JOptionPane.showMessageDialog(null, "Error al registar la estatura del paciente");
+                }
+                else estatura = Float.parseFloat(txtAltura.getText());
+                
+                if (Float.parseFloat(txtPeso.getText())%2!=0) {
+                    JOptionPane.showMessageDialog(null, "Error al registar el peso del paciente");
+                }
+                else peso = Float.parseFloat(txtPeso.getText());
+                
                 String motivoConsulta = txtAreaConsulta.getText();
 
                 paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
@@ -314,7 +326,6 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     private javax.swing.JLabel Logo;
     private javax.swing.JButton btnFinalzar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -322,6 +333,7 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbnAtras;
     private javax.swing.JTextField txtAltura;
     private javax.swing.JTextArea txtAreaConsulta;
     private javax.swing.JTextField txtPeso;
