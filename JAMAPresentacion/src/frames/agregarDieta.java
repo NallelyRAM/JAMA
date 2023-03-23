@@ -22,6 +22,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -659,52 +661,104 @@ public class agregarDieta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo de acompañante de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtAcompañanteCena.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de acompañante de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtAcompañanteComida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de acompañante de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtAcompañanteComida.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de acompañante de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtAcompañanteDesayuno.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de acompañante de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtAcompañanteDesayuno.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de acompañante de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtColacionCena.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de colaciones de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtColacionCena.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de colacion de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtColacionComida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de colaciones de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtColacionComida.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de colacion de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtColacionDesayuno.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de colaciones de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtColacionDesayuno.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de colacion de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtIngredientesCena.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de ingredientes de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtIngredientesCena.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de ingredientes de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtIngredientesComida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de ingredientes de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtIngredientesComida.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de ingredientes de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtIngredientesDesayuno.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de ingredientes de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtIngredientesDesayuno.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de ingredientes de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtNombreComida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de nombre de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtNombreComida.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de nombre de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtNombreDesayuno.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de nombre de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtNombreDesayuno.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de nombre de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtNombreDieta.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de nombre de dieta vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (!validarNombre(txtNombreDieta.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de nombre de dieta.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         if (txtNombreCena.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de nombre de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarNombre(txtNombreCena.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de nombre de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if (txtNumCaloriasCena.getText().equals("")) {
@@ -762,6 +816,12 @@ public class agregarDieta extends javax.swing.JFrame {
         return true;
     }
     
+    public boolean validarNombre(String nombre) {
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$"; // Expresión regular para nombres válidos
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nombre);
+        return matcher.matches();
+    }
     
     private void txtNumCaloriasCenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCaloriasCenaActionPerformed
         // TODO add your handling code here:
