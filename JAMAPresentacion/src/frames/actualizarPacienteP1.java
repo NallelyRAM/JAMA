@@ -275,9 +275,14 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_boxDietaActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+//        dispose();
+//        Paciente myPaciente = new Paciente();
+//        acp2 = new actualizarPacienteP2(myPaciente, paciente);
+        if (validacion()) {
             dispose();
             Paciente myPaciente = new Paciente();
             acp2 = new actualizarPacienteP2(myPaciente, paciente);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -322,14 +327,7 @@ public class actualizarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private boolean validacion() {
-        if (txtNombre.getText().equals("")
-                || txtEmail.getText().equals("")
-                || txtTelefono.getText().equals("")
-                || txtTelefono.getText().contains(".")
-                || txtTelefono.getText().contains("-")
-                || txtTelefono.getText().contains(",")
-                || jDate.getCalendar().toString().equals("")) {
-
+        if (txtNombre.getText().equals("") || txtEmail.getText().equals("") || txtTelefono.getText().equals("") || jDate.getCalendar().toString().equals("")) {
             JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
             return false;
         }

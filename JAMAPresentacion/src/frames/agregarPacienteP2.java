@@ -259,39 +259,12 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jbnAtrasMouseClicked
 
     private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
-
-        float talla=0, estatura=0, peso = 0;
-        try {
-            if (validacion()) {
-                if (Float.parseFloat(txtTalla.getText())%2!=0) {
-                    JOptionPane.showMessageDialog(null, "Error al registar la talla del paciente");
-                }
-                else talla = Float.parseFloat(txtTalla.getText());
-                
-                if (Float.parseFloat(txtAltura.getText())%2!=0) {
-                    JOptionPane.showMessageDialog(null, "Error al registar la estatura del paciente");
-                }
-                else estatura = Float.parseFloat(txtAltura.getText());
-                
-                if (Float.parseFloat(txtPeso.getText())%2!=0) {
-                    JOptionPane.showMessageDialog(null, "Error al registar el peso del paciente");
-                }
-                else peso = Float.parseFloat(txtPeso.getText());
-                
-                String motivoConsulta = txtAreaConsulta.getText();
-
-                paciente = new Paciente(motivoConsulta, null, peso, estatura, talla);
-
-                agregarPacienteP1.guardarCambios(paciente, persona);
-                dispose();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar los datos, llenelos e intentelo de nuevo.");
-            System.out.println(e);
-            btnLimpiar();
+        if (validacion()) {
+            String motivoConsulta = txtAreaConsulta.getText();
+            paciente = new Paciente(txtAreaConsulta.getText(), null, Float.parseFloat(txtPeso.getText()), Float.parseFloat(txtAltura.getText()), Float.parseFloat(txtTalla.getText()));
+            agregarPacienteP1.guardarCambios(paciente, persona);
+            dispose();
         }
-
-
     }//GEN-LAST:event_btnFinalzarActionPerformed
 
     private void txtTallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTallaActionPerformed
@@ -303,20 +276,46 @@ public class agregarPacienteP2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnLimpiar() {
+        this.txtTalla.setText("");
         this.txtPeso.setText("");
         this.txtAltura.setText("");
-        this.txtTalla.setText("");
         this.txtAreaConsulta.setText("");
     }
 
     private boolean validacion() {
-        if (txtPeso.getText().equals("")
-                || txtAltura.getText().equals("")
-                || txtTalla.getText().equals("")
-                || txtAreaConsulta.getText().equals("")) {
-
+        if (txtPeso.getText().equals("") || txtAltura.getText().equals("") || txtTalla.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
             return false;
+        }
+        if (validarCadena(this.txtPeso.getText()) == true) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un peso válido");
+            this.txtPeso.setText("");
+            return false;
+        }
+        if (validarCadena(this.txtTalla.getText()) == true) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese una talla válida");
+            this.txtTalla.setText("");
+            return false;
+        }
+        if (validarCadena(this.txtAltura.getText()) == true) {
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese una altura válida");
+            this.txtAltura.setText("");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validarCadena(String numero) {
+        if (numero.length() < 2 || numero.length() > 3) {
+            return false;
+        }
+        for (int i = 0; i < numero.length(); i++) {
+            if (!Character.isDigit(numero.charAt(i))) {
+                return false;
+            }
         }
         return true;
     }

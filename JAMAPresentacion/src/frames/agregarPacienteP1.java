@@ -286,54 +286,16 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-
-        if (validacion()) {
-            Persona persona = new Persona();
-            if (validarNombre(this.txtNombre.getText()) == true) {
-                String nombre = txtNombre.getText();
-                persona.setNombre(nombre);
-                if (validarNombre(this.txtApellidos.getText()) == true) {
-                    String apellidos = txtApellidos.getText();
-                    persona.setApellidos(apellidos);
-                    if (validarNumero(this.txtTelefono.getText()) == true) {
-                        String telefono = txtTelefono.getText();
-                        persona.setTelefono(telefono);
-                        if (this.txtEmail.getText().contains("@") || this.txtEmail.getText().contains("@gmail.com") || this.txtEmail.getText().contains("@hotmail.com")) {
-
-                            String email = txtEmail.getText();
-                            persona.setEmail(email);
-                            String sexo = comboSexo.getSelectedItem().toString();
-                            persona.setSexo(sexo);
-                            Date fechaNacimiento = dateChooser.getDate();
-                            persona.setFechaNacimiento(fechaNacimiento);
-                            
-                            
-                            dispose();
-                            Paciente myPaciente = new Paciente();
-                            
-                            
-                            
-                            ap2 = new agregarPacienteP2(myPaciente, persona);
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Correo inválido, favor de ingresar nuevamente.");
-                            this.txtEmail.setText("");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Número inválido, favor de ingresar nuevamente.");
-                        this.txtTelefono.setText("");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Apellidos inválidos, favor de ingresar nuevamente.");
-                    this.txtApellidos.setText("");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Nombre inválido, favor de ingresar nuevamente.");
-                this.txtNombre.setText("");
-            }
-
+        Persona persona = new Persona(txtNombre.getText(), txtApellidos.getText(), comboSexo.getSelectedItem().toString(), dateChooser.getDate(), txtTelefono.getText(), txtEmail.getText());
+        if (validacion(persona)) {
+            String sexo = comboSexo.getSelectedItem().toString();
+            persona.setSexo(sexo);
+            Date fechaNacimiento = dateChooser.getDate();
+            persona.setFechaNacimiento(fechaNacimiento);
+            dispose();
+            Paciente myPaciente = new Paciente();
+            ap2 = new agregarPacienteP2(myPaciente, persona);
         }
-
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -379,16 +341,43 @@ public class agregarPacienteP1 extends javax.swing.JFrame {
         this.dateChooser.setCalendar(null);
     }
 
-    private boolean validacion() {
-        if (txtNombre.getText().equals("")
-                || txtApellidos.getText().equals("")
-                || txtEmail.getText().equals("")
-                || txtTelefono.getText().equals("")
-                || dateChooser.getCalendar().toString().equals("")) {
-
+    private boolean validacion(Persona persona) {
+        if (txtNombre.getText().equals("") || txtApellidos.getText().equals("") || txtEmail.getText().equals("") || txtTelefono.getText().equals("") || dateChooser.getCalendar().toString().equals("")) {
             JOptionPane.showMessageDialog(null, "Campos vacíos, llenelos e intentelo de nuevo");
             return false;
         }
+
+        if (validarNombre(this.txtNombre.getText()) == true) {
+            String nombre = txtNombre.getText();
+            persona.setNombre(nombre);
+        } else {
+            JOptionPane.showMessageDialog(null, "Nombre inválido, favor de ingresar nuevamente.");
+            this.txtNombre.setText("");
+        }
+        if (validarNombre(this.txtApellidos.getText()) == true) {
+            String apellidos = txtApellidos.getText();
+            persona.setApellidos(apellidos);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Apellidos inválidos, favor de ingresar nuevamente.");
+            this.txtApellidos.setText("");
+        }
+        if (validarNumero(this.txtTelefono.getText()) == true) {
+            String telefono = txtTelefono.getText();
+            persona.setTelefono(telefono);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Número inválido, favor de ingresar nuevamente.");
+            this.txtTelefono.setText("");
+        }
+        if (this.txtEmail.getText().contains("@") || this.txtEmail.getText().contains("@gmail.com") || this.txtEmail.getText().contains("@hotmail.com")) {
+            String email = txtEmail.getText();
+            persona.setEmail(email);
+        } else {
+            JOptionPane.showMessageDialog(null, "Correo inválido, favor de ingresar nuevamente.");
+            this.txtEmail.setText("");
+        }
+
         return true;
     }
 
