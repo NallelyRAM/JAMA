@@ -38,7 +38,6 @@ import negocio.PersistenciaFachada;
  * @author Usuario
  */
 public class agregarDieta extends javax.swing.JFrame {
-
     byte[] myImgDesayuno;
     byte[] myImgComida;
     byte[] myImgCena;
@@ -52,6 +51,7 @@ public class agregarDieta extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.persistenciaFachada = PersistenciaFachada.getInstance();
+        System.out.println(imgDesayuno.getIcon().toString());
     }
 
     /**
@@ -634,7 +634,7 @@ public class agregarDieta extends javax.swing.JFrame {
                     Integer.parseInt(txtNumCaloriasCena.getText()), myImgCena);
 
             Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
-
+            
             if(persistenciaFachada.registrarDieta(dieta)){
                 JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
                         "Dieta", JOptionPane.INFORMATION_MESSAGE);
@@ -647,15 +647,16 @@ public class agregarDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     public boolean validar(){
-            if (txtAcompañanteCena.getText().equals("")&&txtAcompañanteComida.getText().equals("")&&txtAcompañanteDesayuno.getText().equals("")&&
-                txtColacionCena.getText().equals("")&&txtColacionComida.getText().equals("")&&txtColacionDesayuno.getText().equals("")&&
-                txtIngredientesCena.getText().equals("")&&txtIngredientesComida.getText().equals("")&&txtIngredientesDesayuno.getText().equals("")&&
-                txtNombreComida.getText().equals("")&&txtNombreDesayuno.getText().equals("")&&txtNombreCena.getText().equals("")&&txtNombreDieta.getText().equals("")&&
-                txtNumCaloriasCena.getText().equals("")&&txtNumCaloriasDesayuno.getText().equals("")&&txtNumCaloriasComida.getText().equals("")) {
-           
+        
+        if (txtAcompañanteCena.getText().equals("")&&txtAcompañanteComida.getText().equals("")&&txtAcompañanteDesayuno.getText().equals("")&&
+            txtColacionCena.getText().equals("")&&txtColacionComida.getText().equals("")&&txtColacionDesayuno.getText().equals("")&&
+            txtIngredientesCena.getText().equals("")&&txtIngredientesComida.getText().equals("")&&txtIngredientesDesayuno.getText().equals("")&&
+            txtNombreComida.getText().equals("")&&txtNombreDesayuno.getText().equals("")&&txtNombreCena.getText().equals("")&&txtNombreDieta.getText().equals("")&&
+            txtNumCaloriasCena.getText().equals("")&&txtNumCaloriasDesayuno.getText().equals("")&&txtNumCaloriasComida.getText().equals("")&&fechaInicio.getDate().toString().equalsIgnoreCase("")) {
+
             JOptionPane.showMessageDialog(null, "Campos vacios. Ingrese la información requerida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
-    
+
         }
         if (txtAcompañanteCena.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de acompañante de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
@@ -785,19 +786,19 @@ public class agregarDieta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Valor invalido en el campo de calorias de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (fechaInicio.getDate().toString().equalsIgnoreCase(null)) {
+        if (fechaInicio.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Campo de fecha de inicio de dieta vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (imgCena.getIcon().equals(null)) {
+        if (imgCena.getIcon() == imgDesayuno.getIcon()) {
             JOptionPane.showMessageDialog(null, "Suba una foto del platillo de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (imgComida.getIcon().equals(null)) {
+        if (imgComida.getIcon() == imgComida.getIcon()) {
             JOptionPane.showMessageDialog(null, "Suba una foto del platillo de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (imgDesayuno.getIcon().equals(null)) {
+        if (imgDesayuno.getIcon() == imgDesayuno.getIcon()) {
             JOptionPane.showMessageDialog(null, "Suba una foto del platillo de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
