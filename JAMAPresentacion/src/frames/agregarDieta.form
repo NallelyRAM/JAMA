@@ -646,6 +646,9 @@
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imgDesayunoMousePressed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="agregarDieta_imgDesayuno"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="imgComida">
           <Properties>

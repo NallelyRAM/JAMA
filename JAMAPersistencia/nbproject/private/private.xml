@@ -3,7 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ldoar/OneDrive/Documentos/GitHub/JAMA/JAMAPersistencia/src/persistencia/DietasDAO.java</file>
+            <file>file:/C:/Users/joaquin/Documents/GitHub/PSI/JAMA/JAMAPersistencia/src/interfaces/IConexionBD.java</file>
+            <file>file:/C:/Users/joaquin/Documents/GitHub/PSI/JAMA/JAMAPersistencia/src/persistencia/ConexionBD.java</file>
         </group>
     </open-files>
 </project-private>
