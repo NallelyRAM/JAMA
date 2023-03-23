@@ -808,6 +808,26 @@ public class agregarDieta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Suba una foto del platillo de desayuno.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
+        if (validateByteArrayElement(myImgCena, 0, 65535)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto de la cena con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (validateByteArrayElement(myImgComida, 0, 65535)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto de la comida con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (validateByteArrayElement(myImgDesayuno, 0, 65535)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto del desayuno con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateByteArrayElement(byte[] byteArray, int index, int maxSize) {
+        int size = byteArray[index] & 0xFF;
+        if (size > maxSize) {
+            return false;
+        }
         return true;
     }
 
@@ -824,7 +844,7 @@ public class agregarDieta extends javax.swing.JFrame {
     }
 
     public boolean validarNombre(String nombre) {
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$"; // Expresión regular para nombres válidos
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(nombre);
         return matcher.matches();
