@@ -53,7 +53,7 @@ public class PacientesService implements IPacientesService {
 
     @Override
     public boolean actualizarPaciente(int id,Paciente paciente) {
-        if(!validar(paciente.getIdPersona())){
+        if(!validar(id)){
             return persistencia.actualizarPaciente(id, paciente);
         }
         return false;

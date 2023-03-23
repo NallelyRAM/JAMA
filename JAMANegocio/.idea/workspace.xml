@@ -2,7 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f13c3d-22ed-4d3c-8191-d2aee940ecad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../JAMADominio/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMADominio/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMADominio/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMADominio/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/negocio/PacientesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/negocio/PacientesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/negocio/PacientesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/negocio/PacientesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/ConexionBD.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/ConexionBD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/DietasDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/DietasDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/PacientesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/build/classes/Persistencia/PacientesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/src/persistencia/DietasDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/src/persistencia/DietasDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPersistencia/src/persistencia/PacientesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPersistencia/src/persistencia/PacientesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/FrInicio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP1.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/actualizarPacienteP2.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarDieta.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP1.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/build/classes/frames/agregarPacienteP2.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/FrInicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/FrInicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP1.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP1.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP2.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP2.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/actualizarPacienteP2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarDieta.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarDieta.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarDieta.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarDieta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarPacienteP1.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/PersonaDialog.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarPacienteP1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/PersonaDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarPacienteP2.form" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/PacienteDialog.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/agregarPacienteP2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JAMAPresentacion/src/frames/PacienteDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,15 +88,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMANegocio",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMANegocio&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -35,6 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1679257586048</updated>
       <workItem from="1679257587114" duration="32000" />
+      <workItem from="1679608112719" duration="3000" />
     </task>
     <servers />
   </component>

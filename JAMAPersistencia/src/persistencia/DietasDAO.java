@@ -48,7 +48,7 @@ public class DietasDAO implements IDietasDAO {
             // Deshabilitar el modo de autocommit para permitir la transacción
             baseDatos.setAutoCommit(false);
         } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         // Insertar un registro en la tabla platillo
@@ -89,7 +89,7 @@ public class DietasDAO implements IDietasDAO {
             baseDatos.commit();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         // Insertar un registro en la tabla platillo
@@ -130,7 +130,7 @@ public class DietasDAO implements IDietasDAO {
             baseDatos.commit();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         // Insertar un registro en la tabla platillo
@@ -169,7 +169,7 @@ public class DietasDAO implements IDietasDAO {
             baseDatos.commit();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Persistencia.PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         String sqlPersona = "INSERT INTO dieta (nombre,fechaInicio, fechaFinal, diaSemana, idDesayuno, idComida, idCena) VALUES (?, ?, ?, ?, ?, ?, ?)";

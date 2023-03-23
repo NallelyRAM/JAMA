@@ -8,8 +8,6 @@ import dominio.Cena;
 import dominio.Comida;
 import dominio.Desayuno;
 import dominio.Dieta;
-import dominio.Paciente;
-import dominio.Platillo;
 import interfaces.IPersistenciaFachada;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -650,15 +647,11 @@ public class agregarDieta extends javax.swing.JFrame {
 
     public boolean validar() {
 
-        Icon original_desayuno = new ImageIcon(imgDesayuno.getIcon().toString());
-        Icon original_comida = new ImageIcon(imgComida.getIcon().toString());
-        Icon original_cena = new ImageIcon(imgCena.getIcon().toString());
-
         if (txtAcompañanteCena.getText().equals("") && txtAcompañanteComida.getText().equals("") && txtAcompañanteDesayuno.getText().equals("")
                 && txtColacionCena.getText().equals("") && txtColacionComida.getText().equals("") && txtColacionDesayuno.getText().equals("")
                 && txtIngredientesCena.getText().equals("") && txtIngredientesComida.getText().equals("") && txtIngredientesDesayuno.getText().equals("")
                 && txtNombreComida.getText().equals("") && txtNombreDesayuno.getText().equals("") && txtNombreCena.getText().equals("") && txtNombreDieta.getText().equals("")
-                && txtNumCaloriasCena.getText().equals("") && txtNumCaloriasDesayuno.getText().equals("") && txtNumCaloriasComida.getText().equals("") && fechaInicio.getDate().toString().equalsIgnoreCase("")) {
+                && txtNumCaloriasCena.getText().equals("") && txtNumCaloriasDesayuno.getText().equals("") && txtNumCaloriasComida.getText().equals("")) {
 
             JOptionPane.showMessageDialog(null, "Campos vacios. Ingrese la información requerida.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;

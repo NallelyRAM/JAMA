@@ -4,6 +4,9 @@
  */
 package frames;
 
+import constantes.Constantes;
+import dominio.Paciente;
+import dominio.Persona;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,14 +16,14 @@ import java.util.logging.Logger;
  * @author ldoar
  */
 public class FrInicio extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form FrInicio
      */
     public FrInicio() {
         initComponents();
         setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        setExtendedState(this.MAXIMIZED_BOTH); 
+        setExtendedState(this.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
 
@@ -152,19 +155,19 @@ public class FrInicio extends javax.swing.JFrame {
 
     private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
         try {
-            agregarPacienteP1 nuevoPaciente = new agregarPacienteP1();
+            new PersonaDialog(new Persona(), new Paciente(), Constantes.AGREGAR);
         } catch (SQLException ex) {
-            Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }//GEN-LAST:event_btnAgregarPacienteActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
-       try {
-            actualizarPacienteP1 updatePaciente = new actualizarPacienteP1();
+        try {
+             new PersonaDialog(new Persona(), new Paciente(), Constantes.ACTUALIZAR);
         } catch (SQLException ex) {
             Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
         }
