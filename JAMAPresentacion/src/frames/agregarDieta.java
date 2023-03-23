@@ -171,7 +171,6 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel1.setText("Nombre");
 
         txtNombreDieta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtNombreDieta.setText("Dieta 1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,8 +215,6 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel2.setText("Desayuno");
 
-        txtNombreDesayuno.setText("Desayuno1");
-
         jLabel3.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel3.setText("Nombre");
 
@@ -236,8 +233,6 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel14.setText("Nombre");
 
-        txtNombreComida.setText("Comida1");
-
         jLabel15.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel15.setText("Ingredientes");
 
@@ -247,15 +242,11 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel17.setText("Colación");
 
-        txtColacionComida.setText("comida colacion");
-
         jLabel19.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
         jLabel19.setText("Cena");
 
         jLabel20.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel20.setText("Nombre");
-
-        txtNombreCena.setText("cena1 papu");
 
         jLabel22.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel22.setText("Ingredientes");
@@ -317,51 +308,36 @@ public class agregarDieta extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel11.setText("Número de Calorías");
 
-        txtNumCaloriasDesayuno.setText("2684");
-
         jLabel12.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel12.setText("Número de Calorías");
 
         txtAcompañanteDesayuno.setColumns(20);
         txtAcompañanteDesayuno.setRows(5);
-        txtAcompañanteDesayuno.setText("Acompañante desayuno\n");
         jScrollPane1.setViewportView(txtAcompañanteDesayuno);
 
         txtIngredientesDesayuno.setColumns(20);
         txtIngredientesDesayuno.setRows(5);
-        txtIngredientesDesayuno.setText("ingredientes desayuno\n");
         jScrollPane2.setViewportView(txtIngredientesDesayuno);
 
         txtIngredientesComida.setColumns(20);
         txtIngredientesComida.setRows(5);
-        txtIngredientesComida.setText("Ingredientes comida\n\n");
         jScrollPane3.setViewportView(txtIngredientesComida);
 
         txtAcompañanteComida.setColumns(20);
         txtAcompañanteComida.setRows(5);
-        txtAcompañanteComida.setText("Acompañante comida\n");
         jScrollPane4.setViewportView(txtAcompañanteComida);
-
-        txtColacionDesayuno.setText("Desayuno colacion");
-
-        txtNumCaloriasComida.setText("3000");
 
         txtIngredientesCena.setColumns(20);
         txtIngredientesCena.setRows(5);
-        txtIngredientesCena.setText("Ingredientes cena\n");
         jScrollPane5.setViewportView(txtIngredientesCena);
 
         txtAcompañanteCena.setColumns(20);
         txtAcompañanteCena.setRows(5);
-        txtAcompañanteCena.setText("Acompañante Cena");
         jScrollPane6.setViewportView(txtAcompañanteCena);
-
-        txtColacionCena.setText("comida colacion");
 
         jLabel18.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
         jLabel18.setText("Colación");
 
-        txtNumCaloriasCena.setText("2500");
         txtNumCaloriasCena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumCaloriasCenaActionPerformed(evt);
@@ -577,7 +553,7 @@ public class agregarDieta extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,48 +600,169 @@ public class agregarDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_fechaInicioPropertyChange
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String nombreDieta = txtNombreDieta.getText();
-        Date myFechaInicio = fechaInicio.getDate();
-        Date myFechaFinal = fechaFinal.getDate();
+        if (validar()) {
+            String nombreDieta = txtNombreDieta.getText();
+            Date myFechaInicio = fechaInicio.getDate();
+            Date myFechaFinal = fechaFinal.getDate();
 
-        int diaSemana = Integer.parseInt(comboDia.getSelectedItem().toString().substring(4));
+            int diaSemana = Integer.parseInt(comboDia.getSelectedItem().toString().substring(4));
 
-        String nombreDesayuno = txtNombreDesayuno.getText();
-        String nombreComida = txtNombreComida.getText();
-        String nombreCena = txtNombreCena.getText();
+            String nombreDesayuno = txtNombreDesayuno.getText();
+            String nombreComida = txtNombreComida.getText();
+            String nombreCena = txtNombreCena.getText();
 
-        String ingredientesDesayuno = txtIngredientesDesayuno.getText();
-        String ingredientesComida = txtIngredientesComida.getText();
-        String ingredientesCena = txtIngredientesCena.getText();
+            String ingredientesDesayuno = txtIngredientesDesayuno.getText();
+            String ingredientesComida = txtIngredientesComida.getText();
+            String ingredientesCena = txtIngredientesCena.getText();
 
-        String acompañanteDesayuno = txtAcompañanteDesayuno.getText();
-        String acompañanteComida = txtAcompañanteComida.getText();
-        String acompañanteCena = txtAcompañanteCena.getText();
+            String acompañanteDesayuno = txtAcompañanteDesayuno.getText();
+            String acompañanteComida = txtAcompañanteComida.getText();
+            String acompañanteCena = txtAcompañanteCena.getText();
 
-        String colacionDesayuno = txtColacionDesayuno.getText();
-        String colacionComida = txtColacionComida.getText();
+            String colacionDesayuno = txtColacionDesayuno.getText();
+            String colacionComida = txtColacionComida.getText();
 
-        Desayuno desayuno = new Desayuno(nombreDesayuno, ingredientesDesayuno, acompañanteDesayuno,
-                Integer.parseInt(txtNumCaloriasDesayuno.getText()), myImgDesayuno, colacionDesayuno);
+            Desayuno desayuno = new Desayuno(nombreDesayuno, ingredientesDesayuno, acompañanteDesayuno,
+                    Integer.parseInt(txtNumCaloriasDesayuno.getText()), myImgDesayuno, colacionDesayuno);
 
-        Comida comida = new Comida(nombreComida, ingredientesComida, acompañanteComida,
-                Integer.parseInt(txtNumCaloriasComida.getText()), myImgComida, colacionComida);
+            Comida comida = new Comida(nombreComida, ingredientesComida, acompañanteComida,
+                    Integer.parseInt(txtNumCaloriasComida.getText()), myImgComida, colacionComida);
 
-        Cena cena = new Cena(nombreCena, ingredientesCena, acompañanteCena,
-                Integer.parseInt(txtNumCaloriasCena.getText()), myImgCena);
+            Cena cena = new Cena(nombreCena, ingredientesCena, acompañanteCena,
+                    Integer.parseInt(txtNumCaloriasCena.getText()), myImgCena);
 
-        Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
-        
-        if(persistenciaFachada.registrarDieta(dieta)){
-            JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
-                    "Dieta", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
-                    "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
+
+            if(persistenciaFachada.registrarDieta(dieta)){
+                JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
+                        "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
+                        "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public boolean validar(){
+            if (txtAcompañanteCena.getText().equals("")&&txtAcompañanteComida.getText().equals("")&&txtAcompañanteDesayuno.getText().equals("")&&
+                txtColacionCena.getText().equals("")&&txtColacionComida.getText().equals("")&&txtColacionDesayuno.getText().equals("")&&
+                txtIngredientesCena.getText().equals("")&&txtIngredientesComida.getText().equals("")&&txtIngredientesDesayuno.getText().equals("")&&
+                txtNombreComida.getText().equals("")&&txtNombreDesayuno.getText().equals("")&&txtNombreCena.getText().equals("")&&txtNombreDieta.getText().equals("")&&
+                txtNumCaloriasCena.getText().equals("")&&txtNumCaloriasDesayuno.getText().equals("")&&txtNumCaloriasComida.getText().equals("")) {
+           
+            JOptionPane.showMessageDialog(null, "Campos vacios. Ingrese la información requerida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+    
+        }
+        if (txtAcompañanteCena.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de acompañante de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtAcompañanteComida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de acompañante de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtAcompañanteDesayuno.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de acompañante de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtColacionCena.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de colaciones de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtColacionComida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de colaciones de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtColacionDesayuno.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de colaciones de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtIngredientesCena.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de ingredientes de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtIngredientesComida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de ingredientes de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtIngredientesDesayuno.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de ingredientes de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNombreComida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de nombre de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNombreDesayuno.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de nombre de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNombreDieta.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de nombre de dieta vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNombreCena.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de nombre de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNumCaloriasCena.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de calorias de cena vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarCadena(txtNumCaloriasCena.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de calorias de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNumCaloriasComida.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de calorias de comida vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarCadena(txtNumCaloriasComida.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de calorias de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (txtNumCaloriasDesayuno.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo de calorias de desayuno vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (!validarCadena(txtNumCaloriasDesayuno.getText())) {
+            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de calorias de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (fechaInicio.getDate().toString().equalsIgnoreCase(null)) {
+            JOptionPane.showMessageDialog(null, "Campo de fecha de inicio de dieta vacio.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (imgCena.getIcon().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto del platillo de cena.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (imgComida.getIcon().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto del platillo de comida.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        if (imgDesayuno.getIcon().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto del platillo de desayuno.","Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public  boolean validarCadena(String calorias) {
+        if (calorias.length() < 1 || calorias.length() > 5) {
+            return false;
+        }
+        for (int i = 0; i < calorias.length(); i++) {
+            if (!Character.isDigit(calorias.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
     private void txtNumCaloriasCenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumCaloriasCenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumCaloriasCenaActionPerformed
