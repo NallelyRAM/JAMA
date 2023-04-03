@@ -9,7 +9,6 @@ import dominio.Paciente;
 import dominio.Persona;
 import interfaces.IPersistenciaFachada;
 import java.awt.event.KeyEvent;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import negocio.PersistenciaFachada;
 
@@ -39,11 +38,8 @@ public class PacienteDialog extends javax.swing.JFrame {
         txtAltura.setText(Float.toString(myPaciente.getEstatura()));
         txtAreaConsulta.setText(myPaciente.getMotivoConsulta());
 
-        try {
-            persistenciaFachada = PersistenciaFachada.getInstance();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        persistenciaFachada = PersistenciaFachada.getInstance();
+
         this.persona = persona;
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -292,7 +288,7 @@ public class PacienteDialog extends javax.swing.JFrame {
     private void btnFinalzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalzarActionPerformed
         int idPaciente = paciente.getIdPaciente();
         if (validacion()) {
-            
+
             paciente = new Paciente(txtAreaConsulta.getText(), null, Float.parseFloat(txtPeso.getText()), Float.parseFloat(txtAltura.getText()), Float.parseFloat(txtTalla.getText()));
             paciente.setIdPaciente(idPaciente);
             guardarCambios(paciente, persona);

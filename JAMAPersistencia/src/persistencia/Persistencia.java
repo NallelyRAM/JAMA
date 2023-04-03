@@ -15,27 +15,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *  Clase Persistencia que se encarga de llamar a los métodos correspondientes.
+ * Clase Persistencia que se encarga de llamar a los métodos correspondientes.
+ *
  * @author Equipo 2 - JAMA
  */
-public class Persistencia implements IPersistencia{
-    
+public class Persistencia implements IPersistencia {
+
     IPacientesDAO pacientesDAO;
     IDietasDAO dietasDAO;
-    
-    
+
     private static Persistencia persistencia;
-    
-    public Persistencia() throws SQLException{
-        pacientesDAO = DAOSFactory.crearPacientesDAO();
-        dietasDAO = DAOSFactory.crearDietasDAO();
+
+    public Persistencia() {
+        try {
+            pacientesDAO = DAOSFactory.crearPacientesDAO();
+            dietasDAO = DAOSFactory.crearDietasDAO();
+        } catch (SQLException ex) {
+            System.out.println("Error en: " + ex);
+        }
+
     }
-    
-    public static Persistencia getInstance() throws SQLException{
-        if(persistencia == null) return new Persistencia();
+
+    public static Persistencia getInstance() {
+        if (persistencia == null) {
+            return new Persistencia();
+        }
         return persistencia;
     }
-    
+
     // Pacientes ...
     @Override
     public boolean agregarPaciente(Paciente paciente) {
@@ -66,8 +73,7 @@ public class Persistencia implements IPersistencia{
     public Paciente consultarPorNombrePaciente(String nombre) {
         return pacientesDAO.consultarPorNombre(nombre);
     }
-    
-    
+
     // Dietas ...
     @Override
     public boolean agregarDieta(Dieta dieta) {
@@ -98,5 +104,5 @@ public class Persistencia implements IPersistencia{
     public Dieta consultarPorNombreDieta(String nombre) {
         return dietasDAO.consultarPorNombre(nombre);
     }
-    
+
 }

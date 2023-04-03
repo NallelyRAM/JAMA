@@ -8,6 +8,8 @@ import interfaces.IConexionBD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,12 +24,17 @@ public class ConexionBD implements IConexionBD {
     private static ConexionBD conexionBD;
 
     @Override
-    public Connection crearConexion() throws SQLException {
-        return DriverManager.getConnection(CADENA_CONEXION, USUARIO, CONTRASENIA);
+    public Connection crearConexion()  {
+        try {
+            return DriverManager.getConnection(CADENA_CONEXION, USUARIO, CONTRASENIA);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
-    public Connection obtenerConexion() throws SQLException {
+    public Connection obtenerConexion() {
         if (conexion != null) {
             return conexion;
         }

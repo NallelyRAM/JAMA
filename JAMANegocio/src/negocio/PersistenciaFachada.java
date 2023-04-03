@@ -6,7 +6,6 @@ import dominio.Paciente;
 import interfaces.IDietasService;
 import interfaces.IPacientesService;
 import interfaces.IPersistenciaFachada;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -22,13 +21,13 @@ public class PersistenciaFachada implements IPersistenciaFachada{
     private static PersistenciaFachada persistencia;
     
 
-    public PersistenciaFachada() throws SQLException {
+    public PersistenciaFachada()  {
         pacientesBO = BOSFactory.crearPacientesService();
         dietasBO = BOSFactory.crearDietasService();
         // ...
     }
 
-    public static IPersistenciaFachada getInstance() throws SQLException {
+    public static IPersistenciaFachada getInstance()  {
         if (persistencia == null) {
             return new PersistenciaFachada();
         }

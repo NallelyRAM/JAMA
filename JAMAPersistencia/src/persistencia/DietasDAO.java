@@ -19,8 +19,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,11 +27,15 @@ import java.util.logging.Logger;
 public class DietasDAO implements IDietasDAO {
 
     private final IConexionBD conexion;
-    private final Connection baseDatos;
+    private Connection baseDatos;
 
-    public DietasDAO(IConexionBD conexion) throws SQLException {
+    public DietasDAO(IConexionBD conexion)  {
         this.conexion = conexion;
-        this.baseDatos = this.conexion.obtenerConexion();
+        try {
+            this.baseDatos = this.conexion.obtenerConexion();
+        } catch (SQLException ex) {
+            System.out.println("Error "+ex);
+        }
     }
 
     @Override

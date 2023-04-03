@@ -20,11 +20,16 @@ import java.util.logging.Logger;
 public class PacientesDAO implements IPacientesDAO {
 
     private final IConexionBD conexion;
-    private final Connection baseDatos;
+    private Connection baseDatos = null;
 
-    public PacientesDAO(IConexionBD conexion) throws SQLException {
+    public PacientesDAO(IConexionBD conexion) {
         this.conexion = conexion;
-        this.baseDatos = this.conexion.obtenerConexion();
+        try {
+            this.baseDatos = this.conexion.obtenerConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override

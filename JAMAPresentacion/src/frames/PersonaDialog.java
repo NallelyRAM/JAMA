@@ -8,7 +8,6 @@ import constantes.Constantes;
 import dominio.Paciente;
 import dominio.Persona;
 import interfaces.IPersistenciaFachada;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +20,6 @@ import negocio.PersistenciaFachada;
  */
 public class PersonaDialog extends javax.swing.JFrame {
 
-    
     Persona persona;
     Paciente paciente;
     static int seleccion;
@@ -31,7 +29,7 @@ public class PersonaDialog extends javax.swing.JFrame {
     /**
      * Creates new form agregarPaciente
      */
-    public PersonaDialog(Persona persona, Paciente paciente, int SELECCION) throws SQLException {
+    public PersonaDialog(Persona persona, Paciente paciente, int SELECCION) {
         initComponents();
         this.seleccion = SELECCION;
         if (seleccion == Constantes.AGREGAR) {
@@ -52,12 +50,9 @@ public class PersonaDialog extends javax.swing.JFrame {
         txtApellidos.setText(persona.getApellidos());
         txtEmail.setText(persona.getEmail());
         txtTelefono.setText(persona.getTelefono());
-        
-        try {
-            persistenciaFachada = PersistenciaFachada.getInstance();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+
+        persistenciaFachada = PersistenciaFachada.getInstance();
+
         comboSexo.setSelectedItem(persona.getSexo());
 
         this.setVisible(true);
@@ -384,7 +379,7 @@ public class PersonaDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
-        
+
         try {
             codigo = Integer.parseInt(this.txtCodigo.getText());
             paciente = persistenciaFachada.buscarPacientePorID(codigo);
@@ -416,8 +411,6 @@ public class PersonaDialog extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
-    
 
     private void btnLimpiar() {
         this.txtCodigo.setText("");

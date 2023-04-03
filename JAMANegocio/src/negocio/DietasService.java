@@ -4,7 +4,6 @@ import Persistencia.Persistencia;
 import dominio.Dieta;
 import interfaces.IDietasService;
 import interfaces.IPersistencia;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +16,7 @@ public class DietasService implements IDietasService {
 
     IPersistencia persistencia;
 
-    public DietasService() throws SQLException {
+    public DietasService() {
         this.persistencia = Persistencia.getInstance();
     }
 

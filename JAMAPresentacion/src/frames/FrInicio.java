@@ -7,9 +7,6 @@ package frames;
 import constantes.Constantes;
 import dominio.Paciente;
 import dominio.Persona;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -43,6 +40,7 @@ public class FrInicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAgregarDieta = new javax.swing.JButton();
         btnActualizarDieta = new javax.swing.JButton();
+        btnCatalogoDietas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
 
@@ -91,6 +89,13 @@ public class FrInicio extends javax.swing.JFrame {
             }
         });
 
+        btnCatalogoDietas.setText("Catalogo de Dietas");
+        btnCatalogoDietas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCatalogoDietasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,6 +103,7 @@ public class FrInicio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCatalogoDietas, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,7 +125,9 @@ public class FrInicio extends javax.swing.JFrame {
                 .addComponent(btnAgregarDieta)
                 .addGap(28, 28, 28)
                 .addComponent(btnActualizarDieta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(btnCatalogoDietas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(49, 49, 49))
         );
@@ -165,11 +173,7 @@ public class FrInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
-        try {
-            new PersonaDialog(new Persona(), new Paciente(), Constantes.AGREGAR);
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        new PersonaDialog(new Persona(), new Paciente(), Constantes.AGREGAR);
     }//GEN-LAST:event_btnAgregarPacienteActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -177,28 +181,24 @@ public class FrInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
-        try {
-             new PersonaDialog(new Persona(), new Paciente(), Constantes.ACTUALIZAR);
-        } catch (SQLException ex) {
-            Logger.getLogger(FrInicio.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new PersonaDialog(new Persona(), new Paciente(), Constantes.ACTUALIZAR);
     }//GEN-LAST:event_btnActualizarPacienteActionPerformed
 
     private void btnAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDietaActionPerformed
-        try {
-            new DietaDialog(Constantes.AGREGAR).setVisible(true);
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+
+        new DietaDialog(Constantes.AGREGAR).setVisible(true);
+
     }//GEN-LAST:event_btnAgregarDietaActionPerformed
 
     private void btnActualizarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDietaActionPerformed
-        try {
-            new DietaDialog(Constantes.ACTUALIZAR).setVisible(true);
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+
+        new DietaDialog(Constantes.ACTUALIZAR).setVisible(true);
+
     }//GEN-LAST:event_btnActualizarDietaActionPerformed
+
+    private void btnCatalogoDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoDietasActionPerformed
+        new catalogoDieta(new Paciente()).setVisible(true);
+    }//GEN-LAST:event_btnCatalogoDietasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +241,7 @@ public class FrInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizarPaciente;
     private javax.swing.JButton btnAgregarDieta;
     private javax.swing.JButton btnAgregarPaciente;
+    private javax.swing.JButton btnCatalogoDietas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

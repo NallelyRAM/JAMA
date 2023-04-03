@@ -7,24 +7,23 @@ package BOSFactory;
 
 import interfaces.IDietasService;
 import interfaces.IPacientesService;
-import java.sql.SQLException;
 import negocio.DietasService;
 import negocio.PacientesService;
 
 /**
- *  Actúa como la fábrica de instancias.
+ * Actúa como la fábrica de instancias.
+ *
  * @author Equipo 2 - JAMA
  */
 public class BOSFactory {
-    
-    public static IPacientesService crearPacientesService() throws SQLException {
+
+    public static IPacientesService crearPacientesService() {
         return new PacientesService();
     }
-    
-    public static IDietasService crearDietasService() throws SQLException {
+
+    public static IDietasService crearDietasService() {
         return new DietasService();
     }
-    
+
     // ...
-    
 }
