@@ -47,10 +47,7 @@ public class DietasService implements IDietasService {
 
     @Override
     public boolean actualizarDieta(int id, Dieta dieta) {
-        if (!validar(dieta.getIdDieta())) {
-            return persistencia.actualizarDieta(id, dieta);
-        }
-        return false;
+        return persistencia.actualizarDieta(id, dieta);
     }
 
     @Override

@@ -10,12 +10,30 @@ package dominio;
  */
 public class Cena extends Platillo{
 
+    private int id;
+    
     public Cena() {
     }
 
+    public Cena(int id, String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto) {
+        super(nombre, ingredientes, acompanante, numCalorias, foto);
+        this.id = id;
+    }
+    
     public Cena(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto) {
         super(nombre, ingredientes, acompanante, numCalorias, foto);
     }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     @Override
     public String toString() {

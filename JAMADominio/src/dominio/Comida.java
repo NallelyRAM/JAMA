@@ -9,11 +9,18 @@ package dominio;
  * @author Usuario
  */
 public class Comida extends Platillo{
-    public String colacion;
+    private String colacion;
+    private int id;
 
     public Comida(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
         super(nombre, ingredientes, acompanante, numCalorias, foto);
         this.colacion = colacion;
+    }
+    
+    public Comida(int id, String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
+        super(nombre, ingredientes, acompanante, numCalorias, foto);
+        this.colacion = colacion;
+        this.id = id;
     }
     
     public Comida() {
@@ -30,6 +37,17 @@ public class Comida extends Platillo{
     public void setColacion(String colacion) {
         this.colacion = colacion;
     }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     @Override
     public String toString() {

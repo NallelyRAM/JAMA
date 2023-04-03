@@ -4,7 +4,6 @@
  */
 package dominio;
 
-import java.util.Arrays;
 
 /**
  *
@@ -12,11 +11,18 @@ import java.util.Arrays;
  */
 public class Desayuno extends Platillo {
 
-    public String colacion;
+    private String colacion;
+    private int id;
 
     public Desayuno(String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
         super(nombre, ingredientes, acompanante, numCalorias, foto);
         this.colacion = colacion;
+    }
+    
+    public Desayuno(int id, String nombre, String ingredientes, String acompanante, int numCalorias, byte[] foto, String colacion) {
+        super(nombre, ingredientes, acompanante, numCalorias, foto);
+        this.colacion = colacion;
+        this.id = id;
     }
 
     public Desayuno() {
@@ -34,6 +40,16 @@ public class Desayuno extends Platillo {
         this.colacion = colacion;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     @Override
     public String toString() {
         return "Desayuno ["

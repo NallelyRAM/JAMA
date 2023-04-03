@@ -42,6 +42,7 @@ public class FrInicio extends javax.swing.JFrame {
         btnActualizarPaciente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnAgregarDieta = new javax.swing.JButton();
+        btnActualizarDieta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
 
@@ -83,6 +84,13 @@ public class FrInicio extends javax.swing.JFrame {
             }
         });
 
+        btnActualizarDieta.setText("Actualizar Dieta");
+        btnActualizarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarDietaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,6 +98,7 @@ public class FrInicio extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,7 +117,9 @@ public class FrInicio extends javax.swing.JFrame {
                 .addComponent(btnActualizarPaciente)
                 .addGap(28, 28, 28)
                 .addComponent(btnAgregarDieta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(btnActualizarDieta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(49, 49, 49))
         );
@@ -175,11 +186,19 @@ public class FrInicio extends javax.swing.JFrame {
 
     private void btnAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDietaActionPerformed
         try {
-            new agregarDieta().setVisible(true);
+            new DietaDialog(Constantes.AGREGAR).setVisible(true);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }//GEN-LAST:event_btnAgregarDietaActionPerformed
+
+    private void btnActualizarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDietaActionPerformed
+        try {
+            new DietaDialog(Constantes.ACTUALIZAR).setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_btnActualizarDietaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +237,7 @@ public class FrInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton btnActualizarDieta;
     private javax.swing.JButton btnActualizarPaciente;
     private javax.swing.JButton btnAgregarDieta;
     private javax.swing.JButton btnAgregarPaciente;

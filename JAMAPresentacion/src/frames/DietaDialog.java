@@ -4,6 +4,7 @@
  */
 package frames;
 
+import constantes.Constantes;
 import dominio.Cena;
 import dominio.Comida;
 import dominio.Desayuno;
@@ -11,9 +12,13 @@ import dominio.Dieta;
 import interfaces.IPersistenciaFachada;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,28 +34,41 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import negocio.PersistenciaFachada;
+import static sun.security.krb5.Confounder.bytes;
 
 /**
  *
  * @author Usuario
  */
-public class agregarDieta extends javax.swing.JFrame {
+public class DietaDialog extends javax.swing.JFrame {
 
     byte[] myImgDesayuno;
     byte[] myImgComida;
     byte[] myImgCena;
     IPersistenciaFachada persistenciaFachada;
+    int seleccion;
 
     /**
      * Creates new form agregarDieta
      *
+     * @param seleccion
      * @throws java.sql.SQLException
      */
-    public agregarDieta() throws SQLException {
+    public DietaDialog(int seleccion) throws SQLException {
         initComponents();
         setLocationRelativeTo(null);
+        this.seleccion = seleccion;
+        if (seleccion == Constantes.AGREGAR) {
+            lblID.setVisible(false);
+            txtBuscarIDDieta.setVisible(false);
+            btnBuscarDieta.setVisible(false);
+        }
+
+        if (seleccion == Constantes.ACTUALIZAR) {
+            setTitle("Actualizar Dieta");
+            btnGuardar.setText("Actualizar");
+        }
         this.persistenciaFachada = PersistenciaFachada.getInstance();
-        System.out.println(imgDesayuno.getIcon().toString());
     }
 
     /**
@@ -69,6 +87,9 @@ public class agregarDieta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtNombreDieta = new javax.swing.JTextField();
+        lblID = new javax.swing.JLabel();
+        txtBuscarIDDieta = new javax.swing.JTextField();
+        btnBuscarDieta = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         fechaFinal = new com.toedter.calendar.JDateChooser();
         fechaInicio = new com.toedter.calendar.JDateChooser();
@@ -115,8 +136,6 @@ public class agregarDieta extends javax.swing.JFrame {
         txtIngredientesCena = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtAcompañanteCena = new javax.swing.JTextArea();
-        txtColacionCena = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         txtNumCaloriasCena = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -173,6 +192,19 @@ public class agregarDieta extends javax.swing.JFrame {
 
         txtNombreDieta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        lblID.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
+        lblID.setText("ID:");
+
+        txtBuscarIDDieta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnBuscarDieta.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
+        btnBuscarDieta.setText("Buscar");
+        btnBuscarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDietaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,7 +214,13 @@ public class agregarDieta extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtBuscarIDDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBuscarDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +228,10 @@ public class agregarDieta extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtNombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblID)
+                    .addComponent(txtBuscarIDDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarDieta))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -336,9 +377,6 @@ public class agregarDieta extends javax.swing.JFrame {
         txtAcompañanteCena.setRows(5);
         jScrollPane6.setViewportView(txtAcompañanteCena);
 
-        jLabel18.setFont(new java.awt.Font("OCR A Extended", 0, 14)); // NOI18N
-        jLabel18.setText("Colación");
-
         txtNumCaloriasCena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumCaloriasCenaActionPerformed(evt);
@@ -411,8 +449,6 @@ public class agregarDieta extends javax.swing.JFrame {
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                                     .addComponent(jLabel12)
                                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                                    .addComponent(jLabel18)
-                                    .addComponent(txtColacionCena)
                                     .addComponent(txtNumCaloriasCena))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -432,7 +468,7 @@ public class agregarDieta extends javax.swing.JFrame {
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(42, 42, 42))))))
+                                .addGap(36, 36, 36))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,74 +507,74 @@ public class agregarDieta extends javax.swing.JFrame {
                                 .addGap(4, 4, 4)
                                 .addComponent(imgDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtColacionDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel16)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtColacionComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel6))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel11))))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel16)
-                                .addGap(3, 3, 3)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtColacionComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel18)
-                                .addGap(3, 3, 3)
-                                .addComponent(txtColacionCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNumCaloriasCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel12)))
+                                .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(imgCena, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(comboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(imgCena, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel22)))
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel22)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtNumCaloriasCena, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addGap(3, 53, Short.MAX_VALUE)
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)
                         .addGap(4, 4, 4))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumCaloriasDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNumCaloriasDesayuno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(txtNumCaloriasComida, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -634,21 +670,48 @@ public class agregarDieta extends javax.swing.JFrame {
 
             Dieta dieta = new Dieta(nombreDieta, myFechaInicio, myFechaFinal, diaSemana, desayuno, comida, cena);
 
-            if (persistenciaFachada.registrarDieta(dieta)) {
-                JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
-                        "Dieta", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
-                        "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            if (seleccion == Constantes.AGREGAR) {
+                if (persistenciaFachada.registrarDieta(dieta)) {
+                    JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.",
+                            "Dieta", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
+                            "Dieta", JOptionPane.INFORMATION_MESSAGE);
+                }
+                return;
             }
+
+            if (seleccion == Constantes.ACTUALIZAR) {
+                int id = validarCadena(txtBuscarIDDieta.getText()) ? Integer.parseInt(txtBuscarIDDieta.getText()) : -1;
+
+                if (id == -1) {
+                    JOptionPane.showMessageDialog(null, "El ID no es válido", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                Dieta dietaEncontrada = persistenciaFachada.buscarDietaPorID(id);
+
+                dieta.getDesayuno().setId(dietaEncontrada.getDesayuno().getId());
+                dieta.getComida().setId(dietaEncontrada.getComida().getId());
+                dieta.getCena().setId(dietaEncontrada.getCena().getId());
+
+                if (persistenciaFachada.actualizarDieta(id, dieta)) {
+                    JOptionPane.showMessageDialog(null, "Dieta actualizada con éxito.",
+                            "Dieta", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado.",
+                            "Dieta", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     public boolean validar() {
 
         if (txtAcompañanteCena.getText().equals("") && txtAcompañanteComida.getText().equals("") && txtAcompañanteDesayuno.getText().equals("")
-                && txtColacionCena.getText().equals("") && txtColacionComida.getText().equals("") && txtColacionDesayuno.getText().equals("")
+                && txtColacionComida.getText().equals("") && txtColacionDesayuno.getText().equals("")
                 && txtIngredientesCena.getText().equals("") && txtIngredientesComida.getText().equals("") && txtIngredientesDesayuno.getText().equals("")
                 && txtNombreComida.getText().equals("") && txtNombreDesayuno.getText().equals("") && txtNombreCena.getText().equals("") && txtNombreDieta.getText().equals("")
                 && txtNumCaloriasCena.getText().equals("") && txtNumCaloriasDesayuno.getText().equals("") && txtNumCaloriasComida.getText().equals("")) {
@@ -681,14 +744,7 @@ public class agregarDieta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Valor invalido en el campo de acompañante de desayuno.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (txtColacionCena.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo de colaciones de cena vacio.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if (!validarNombre(txtColacionCena.getText())) {
-            JOptionPane.showMessageDialog(null, "Valor invalido en el campo de colacion de cena.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
+
         if (txtColacionComida.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo de colaciones de comida vacio.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
@@ -801,27 +857,25 @@ public class agregarDieta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Suba una foto del platillo de desayuno.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (validateByteArrayElement(myImgCena, 0, 65535)) {
-            JOptionPane.showMessageDialog(null, "Suba una foto de la cena con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        if (!validateByteArrayElement(myImgCena)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto de la cena con el tamaño menor a 4GB", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (validateByteArrayElement(myImgComida, 0, 65535)) {
-            JOptionPane.showMessageDialog(null, "Suba una foto de la comida con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        if (!validateByteArrayElement(myImgComida)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto de la comida con el tamaño menor a 4GB", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if (validateByteArrayElement(myImgDesayuno, 0, 65535)) {
-            JOptionPane.showMessageDialog(null, "Suba una foto del desayuno con el tamaño menor a .5mb", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        if (!validateByteArrayElement(myImgDesayuno)) {
+            JOptionPane.showMessageDialog(null, "Suba una foto del desayuno con el tamaño menor a 4GB", "Dieta", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;
     }
 
-    public boolean validateByteArrayElement(byte[] byteArray, int index, int maxSize) {
-        int size = byteArray[index] & 0xFF;
-        if (size > maxSize) {
-            return false;
-        }
-        return true;
+    public boolean validateByteArrayElement(byte[] byteArray) {
+        long maxSize = 4000000;
+        int index = 0;
+        return (byteArray[index] & 0xFF) <= maxSize;
     }
 
     public boolean validarCadena(String calorias) {
@@ -837,7 +891,7 @@ public class agregarDieta extends javax.swing.JFrame {
     }
 
     public boolean validarNombre(String nombre) {
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+$";
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\\s]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(nombre);
         return matcher.matches();
@@ -851,6 +905,94 @@ public class agregarDieta extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnBuscarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDietaActionPerformed
+        int id = validarCadena(txtBuscarIDDieta.getText()) ? Integer.parseInt(txtBuscarIDDieta.getText()) : -1;
+
+        if (id == -1) {
+            JOptionPane.showMessageDialog(null, "El ID no es válido", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Dieta dieta = persistenciaFachada.buscarDietaPorID(id);
+        if (dieta != null) {
+            llenarCamposDeActualizarDieta(dieta);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la dieta.", "Dieta", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarDietaActionPerformed
+
+    public void llenarCamposDeActualizarDieta(Dieta dieta) {
+        txtNombreDieta.setText(dieta.getNombreDieta());
+        fechaInicio.setDate(dieta.getFechaInicio());
+        fechaFinal.setDate(dieta.getFechaFinal());
+        comboDia.setSelectedItem("Día " + dieta.getDiaSemana());
+
+        // Imagenes ...
+        myImgDesayuno = dieta.getDesayuno().getFoto();
+        myImgComida = dieta.getComida().getFoto();
+        myImgCena = dieta.getCena().getFoto();
+
+        escalarImagen(myImgDesayuno, imgDesayuno);
+        escalarImagen(myImgComida, imgComida);
+        escalarImagen(myImgCena, imgCena);
+
+        // Desayuno ...
+        txtNombreDesayuno.setText(dieta.getDesayuno().getNombre());
+        txtIngredientesDesayuno.setText(dieta.getDesayuno().getIngredientes());
+        txtAcompañanteDesayuno.setText(dieta.getDesayuno().getAcompanante());
+        txtColacionDesayuno.setText(dieta.getDesayuno().getColacion());
+        txtNumCaloriasDesayuno.setText(String.valueOf(dieta.getDesayuno().getNumCalorias()));
+
+        // Comida ...
+        txtNombreComida.setText(dieta.getComida().getNombre());
+        txtIngredientesComida.setText(dieta.getComida().getIngredientes());
+        txtAcompañanteComida.setText(dieta.getComida().getAcompanante());
+        txtColacionComida.setText(dieta.getComida().getColacion());
+        txtNumCaloriasComida.setText(String.valueOf(dieta.getComida().getNumCalorias()));
+
+        // Cena ...
+        txtNombreCena.setText(dieta.getCena().getNombre());
+        txtIngredientesCena.setText(dieta.getCena().getIngredientes());
+        txtAcompañanteCena.setText(dieta.getCena().getAcompanante());
+        txtNumCaloriasCena.setText(String.valueOf(dieta.getCena().getNumCalorias()));
+    }
+
+    public ImageIcon bytesToImage(byte[] bytesImage) {
+        try {
+            InputStream inputStream = new ByteArrayInputStream(bytesImage);
+            BufferedImage bufferedImage = ImageIO.read(inputStream);
+            return new ImageIcon(bufferedImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void escalarImagen(byte[] imagenBytes, JLabel label) {
+
+        BufferedImage image = null;
+        File tempFile = null;
+        
+        try {
+            tempFile = File.createTempFile("temp", ".jpg");
+        } catch (IOException ex) {
+            System.out.println("Error en: "+ex);
+        }
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            fos.write(imagenBytes);
+        } catch (Exception ex) {
+            System.out.println("error: "+ex);
+        } 
+
+        try {
+            image = ImageIO.read(tempFile);
+        } catch (IOException ex) {
+            Logger.getLogger(DietaDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image scaledImage = image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(scaledImage);
+        label.setIcon(icon);
+    }
+
     public byte[] insertarImagen(JLabel label) {
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "jpg", "jpeg", "png", "gif");
@@ -863,7 +1005,7 @@ public class agregarDieta extends javax.swing.JFrame {
             try {
                 image = ImageIO.read(new File(selectedFile.getAbsolutePath()));
             } catch (IOException ex) {
-                Logger.getLogger(agregarDieta.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DietaDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
             Image scaledImage = image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(scaledImage);
@@ -888,6 +1030,7 @@ public class agregarDieta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton btnBuscarDieta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> comboDia;
@@ -905,7 +1048,6 @@ public class agregarDieta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -926,11 +1068,12 @@ public class agregarDieta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNombreNutriologo1;
     private javax.swing.JTextArea txtAcompañanteCena;
     private javax.swing.JTextArea txtAcompañanteComida;
     private javax.swing.JTextArea txtAcompañanteDesayuno;
-    private javax.swing.JTextField txtColacionCena;
+    private javax.swing.JTextField txtBuscarIDDieta;
     private javax.swing.JTextField txtColacionComida;
     private javax.swing.JTextField txtColacionDesayuno;
     private javax.swing.JTextArea txtIngredientesCena;

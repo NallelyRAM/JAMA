@@ -9,7 +9,6 @@ import dominio.Cena;
 import dominio.Comida;
 import dominio.Desayuno;
 import dominio.Dieta;
-import dominio.Paciente;
 import dominio.Platillo;
 import interfaces.IConexionBD;
 import interfaces.IDietasDAO;
@@ -194,52 +193,164 @@ public class DietasDAO implements IDietasDAO {
 
     @Override
     public boolean actualizar(int id, Dieta dieta) {
-//         try {
-//            // Deshabilitar el modo de autocommit para permitir la transacción
-//            baseDatos.setAutoCommit(false);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        // Actualizar un registro en la tabla persona
-//        try {
-//            String consultaPaciente = "UPDATE Paciente SET motivoConsulta = ?, idDieta = ? WHERE idPaciente = ?";
-//            PreparedStatement sentenciaPaciente = baseDatos.prepareStatement(consultaPaciente);
-//            sentenciaPaciente.setString(1, paciente.getMotivoConsulta());
-//            sentenciaPaciente.setInt(2, paciente.getDieta().getIdDieta());
-//            sentenciaPaciente.setInt(3, id);
-//
-//            sentenciaPaciente.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        try {
-//            String consultaPersona = "UPDATE Persona SET nombre = ?, edad = ?, sexo = ?, fechaNacimiento = ?, email = ?, telefono = ? WHERE idPersona = ?";
-//            PreparedStatement sentenciaPersona = baseDatos.prepareStatement(consultaPersona);
-//            sentenciaPersona.setString(1, paciente.getNombre());
-//            sentenciaPersona.setInt(2, paciente.getEdad());
-//            sentenciaPersona.setString(3, paciente.getSexo());
-//            sentenciaPersona.setDate(4, new java.sql.Date(paciente.getFechaNacimiento().getTime()));
-//            sentenciaPersona.setString(5, paciente.getEmail());
-//            sentenciaPersona.setString(6, paciente.getTelefono());
-//            sentenciaPersona.setInt(7, id);
-//            sentenciaPersona.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        try {
-//            // Confirmar la transacción
-//            baseDatos.commit();
-//            return true;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PacientesDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return false;
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
+        int idDesayuno = 0;
+        int idComida = 0;
+        int idCena = 0;
+
+        int idPlatilloDesayuno = 0;
+        int idPlatilloComida = 0;
+        int idPlatilloCena = 0;
+
+        try {
+            // Deshabilitar el modo de autocommit para permitir la transacción
+            baseDatos.setAutoCommit(false);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        String mySqlDesayuno = "SELECT idPlatillo FROM desayuno WHERE idDesayuno = ?";
+        String mySqlComida = "SELECT idPlatillo FROM comida WHERE idComida = ?";
+        String mySqlCena = "SELECT idPlatillo FROM cena WHERE idCena = ?";
+        try (PreparedStatement pstmtDesayuno = baseDatos.prepareStatement(mySqlDesayuno); PreparedStatement pstmtComida = baseDatos.prepareStatement(mySqlComida); PreparedStatement pstmtCena = baseDatos.prepareStatement(mySqlCena)) {
+            pstmtDesayuno.setInt(1, dieta.getDesayuno().getId());
+            pstmtComida.setInt(1, dieta.getComida().getId());
+            pstmtCena.setInt(1, dieta.getCena().getId());
+            try (ResultSet rsDesayuno = pstmtDesayuno.executeQuery(); ResultSet rsComida = pstmtComida.executeQuery(); ResultSet rsCena = pstmtCena.executeQuery()) {
+                if (rsDesayuno.next()) {
+                    idPlatilloDesayuno = rsDesayuno.getInt("idPlatillo");
+                }
+                if (rsComida.next()) {
+                    idPlatilloComida = rsComida.getInt("idPlatillo");
+                }
+                if (rsCena.next()) {
+                    idPlatilloCena = rsCena.getInt("idPlatillo");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en: " + ex);
+        }
+
+        // Actualizar un registro en la tabla platillo
+        String sqlPlatilloDesayuno = "UPDATE platillo SET nombre=?, ingredientes=?, acompañante=?, numCalorias=?, foto=?  WHERE idPlatillo=?";
+        try (PreparedStatement pstmtPlatillo = baseDatos.prepareStatement(sqlPlatilloDesayuno, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtPlatillo.setString(1, dieta.getDesayuno().getNombre());
+            pstmtPlatillo.setString(2, dieta.getDesayuno().getIngredientes());
+            pstmtPlatillo.setString(3, dieta.getDesayuno().getAcompanante());
+            pstmtPlatillo.setInt(4, dieta.getDesayuno().getNumCalorias());
+            pstmtPlatillo.setBytes(5, dieta.getDesayuno().getFoto());
+
+            pstmtPlatillo.setInt(6, idPlatilloDesayuno);
+            pstmtPlatillo.executeUpdate();
+
+            idDesayuno = dieta.getDesayuno().getId();
+
+            String sqlDesayuno = "UPDATE desayuno SET colacion=?, idPlatillo=? WHERE idDesayuno=?";
+            try (PreparedStatement pstmtDesayuno = baseDatos.prepareStatement(sqlDesayuno)) {
+                pstmtDesayuno.setString(1, dieta.getDesayuno().getColacion());
+                pstmtDesayuno.setInt(2, idPlatilloDesayuno);
+
+                pstmtDesayuno.setInt(3, idDesayuno);
+                pstmtDesayuno.executeUpdate();
+
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        try {
+            // Confirmar la transacción
+            baseDatos.commit();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        String sqlPlatilloComida = "UPDATE platillo SET nombre=?, ingredientes=?, acompañante=?, numCalorias=?, foto=?  WHERE idPlatillo=?";
+        try (PreparedStatement pstmtPlatillo = baseDatos.prepareStatement(sqlPlatilloComida, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtPlatillo.setString(1, dieta.getComida().getNombre());
+            pstmtPlatillo.setString(2, dieta.getComida().getIngredientes());
+            pstmtPlatillo.setString(3, dieta.getComida().getAcompanante());
+            pstmtPlatillo.setInt(4, dieta.getComida().getNumCalorias());
+            pstmtPlatillo.setBytes(5, dieta.getComida().getFoto());
+
+            pstmtPlatillo.setInt(6, idPlatilloComida);
+            pstmtPlatillo.executeUpdate();
+
+            idComida = dieta.getComida().getId();
+            String sqlComida = "UPDATE comida SET colacion=?, idPlatillo=? WHERE idComida=?";
+            try (PreparedStatement pstmtComida = baseDatos.prepareStatement(sqlComida, Statement.RETURN_GENERATED_KEYS)) {
+                pstmtComida.setString(1, dieta.getComida().getColacion());
+                pstmtComida.setInt(2, idPlatilloComida);
+                
+                pstmtComida.setInt(3, idComida);
+                pstmtComida.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        try {
+            // Confirmar la transacción
+            baseDatos.commit();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        String sqlPlatilloCena = "UPDATE platillo SET nombre=?, ingredientes=?, acompañante=?, numCalorias=?, foto=? WHERE idPlatillo=?";
+        try (PreparedStatement pstmtPlatillo = baseDatos.prepareStatement(sqlPlatilloCena, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtPlatillo.setString(1, dieta.getCena().getNombre());
+            pstmtPlatillo.setString(2, dieta.getCena().getIngredientes());
+            pstmtPlatillo.setString(3, dieta.getCena().getAcompanante());
+            pstmtPlatillo.setInt(4, dieta.getCena().getNumCalorias());
+            pstmtPlatillo.setBytes(5, dieta.getCena().getFoto());
+
+            pstmtPlatillo.setInt(6, idPlatilloCena);
+            pstmtPlatillo.executeUpdate();
+
+            
+            idCena = dieta.getCena().getId();
+            
+            String sqlComida = "UPDATE cena SET idPlatillo=? WHERE idCena=?";
+            try (PreparedStatement pstmtCena = baseDatos.prepareStatement(sqlComida, Statement.RETURN_GENERATED_KEYS)) {
+                pstmtCena.setInt(1, idPlatilloCena);
+                
+                pstmtCena.setInt(2, idCena);
+                pstmtCena.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        try {
+            // Confirmar la transacción
+            baseDatos.commit();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        String sqlPersona = "UPDATE dieta SET nombre=?, fechaInicio=?, fechaFinal=?, diaSemana=?, idDesayuno=?, idComida=?, idCena=? WHERE idDieta=?";
+        try (PreparedStatement pstmtPersona = baseDatos.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtPersona.setString(1, dieta.getNombreDieta());
+            pstmtPersona.setDate(2, new java.sql.Date(dieta.getFechaInicio().getTime()));
+            pstmtPersona.setDate(3, new java.sql.Date(dieta.getFechaFinal().getTime()));
+            pstmtPersona.setInt(4, dieta.getDiaSemana());
+            pstmtPersona.setInt(5, idDesayuno);
+            pstmtPersona.setInt(6, idComida);
+            pstmtPersona.setInt(7, idCena);
+            
+            pstmtPersona.setInt(8, id);
+            pstmtPersona.executeUpdate();
+            baseDatos.commit();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 
     @Override
@@ -300,7 +411,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                desayuno = new Desayuno(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                desayuno = new Desayuno(idDesayuno, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto(), colacion);
 
                 String queryComida = "SELECT * FROM comida WHERE idComida = ?";
@@ -334,7 +445,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                comida = new Comida(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                comida = new Comida(idComida, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto(), colacion);
 
                 String queryCena = "SELECT * FROM cena WHERE idCena = ?";
@@ -366,7 +477,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                cena = new Cena(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                cena = new Cena(idCena, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto());
 
                 return new Dieta(nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena);
@@ -434,7 +545,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                desayuno = new Desayuno(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                desayuno = new Desayuno(idDesayuno, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto(), colacion);
 
                 String queryComida = "SELECT * FROM comida WHERE idComida = ?";
@@ -449,7 +560,6 @@ public class DietasDAO implements IDietasDAO {
                 while (resultadoComida.next()) {
                     idPlatillo = resultadoComida.getInt("idPlatillo");
                     colacion = resultadoComida.getString("colacion");
-
                 }
 
                 queryComida = "SELECT * FROM platillo WHERE idPlatillo = ?";
@@ -468,7 +578,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                comida = new Comida(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                comida = new Comida(idComida, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto(), colacion);
 
                 String queryCena = "SELECT * FROM cena WHERE idCena = ?";
@@ -500,7 +610,7 @@ public class DietasDAO implements IDietasDAO {
                     platillo = new Platillo(idPlatillo, nombre, ingredientes, acompañante, numCalorias, foto);
                 }
 
-                cena = new Cena(platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
+                cena = new Cena(idCena, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto());
 
                 dietas.add(new Dieta(nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena));
