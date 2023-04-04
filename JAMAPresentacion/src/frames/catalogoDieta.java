@@ -4,6 +4,7 @@
  */
 package frames;
 
+import constantes.Constantes;
 import dominio.Dieta;
 import dominio.Paciente;
 import dominio.Platillo;
@@ -38,7 +39,7 @@ import negocio.PersistenciaFachada;
  *
  * @author Usuario
  */
-public class catalogoDieta extends javax.swing.JFrame {
+public class CatalogoDieta extends javax.swing.JFrame {
 
     IPersistenciaFachada persistenciaFachada;
     static final int INDEX_DEFAULT = 0;
@@ -50,14 +51,20 @@ public class catalogoDieta extends javax.swing.JFrame {
     int indexDesayuno = 0;
     int indexComida = 0;
     int indexCena = 0;
-    
+
+    int desayunosCatalogo = 3;
+    int comidasCatalogo = 3;
+    int cenasCatalogo = 3;
+
     Paciente paciente;
+    int operacion;
 
     /**
      * Creates new form catalogoDieta
      */
-    public catalogoDieta(Paciente paciente) {
+    public CatalogoDieta(Paciente paciente, int operacion) {
         initComponents();
+        this.operacion = operacion;
         setSize(907, 900);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -982,48 +989,65 @@ public class catalogoDieta extends javax.swing.JFrame {
 
     private void panelGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGuardarMousePressed
 
-        String nombreDieta = (String) JOptionPane.showInputDialog(null, "Ingrese el nombre de la Dieta",
-                "Catalogo de Dietas", JOptionPane.INFORMATION_MESSAGE, Logo.getIcon(),
-                null, null);
-
+        String nombreDieta = "";
+        int idDieta = 0;
         for (int i = 0; i < dietas.size(); i++) {
             Dieta myDieta = dietas.get(i);
             if (myDieta.getDesayuno() == dietas.get(seleccionDesayuno).getDesayuno()
                     && myDieta.getComida() == dietas.get(seleccionComida).getComida()
                     && myDieta.getCena() == dietas.get(seleccionCena).getCena()) {
-                String mensaje = "Ya existe una dieta igual y es '" + myDieta.getNombreDieta()+"'";
-
-                JOptionPane.showMessageDialog(null, mensaje, "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
-                return;
-            }
+                if (operacion == Constantes.AGREGAR) {
+                    String mensaje = "Ya existe una dieta igual y es '" + myDieta.getNombreDieta() + "'";
+                    JOptionPane.showMessageDialog(null, mensaje, "Dietas",
+                            JOptionPane.INFORMATION_MESSAGE, null);
+                    
+                }
+                idDieta = dietas.get(i).getIdDieta();
+                nombreDieta = myDieta.getNombreDieta();
+            } 
         }
-        Dieta dieta = new Dieta(nombreDieta, new Date(), Date.from(LocalDate.now().
+
+        if (operacion == Constantes.AGREGAR) {
+            nombreDieta = (String) JOptionPane.showInputDialog(null, "Ingrese el nombre de la Dieta",
+                    "Catalogo de Dietas", JOptionPane.INFORMATION_MESSAGE, Logo.getIcon(),
+                    null, null);
+        }
+
+        Dieta dieta = new Dieta(idDieta, nombreDieta, new Date(), Date.from(LocalDate.now().
                 plusWeeks(1).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0,
                 dietas.get(seleccionDesayuno).getDesayuno(), dietas.get(seleccionComida).getComida(),
                 dietas.get(seleccionCena).getCena());
 
-        String msg = "";
-        if(paciente.getNombre() != null){
-            msg = "y vinculada al paciente";
-            paciente.setDieta(dieta);
+        if (operacion == Constantes.ACTUALIZAR) {
+            if (paciente.getNombre() != null) {
+                paciente.setDieta(dieta);
+                JOptionPane.showMessageDialog(null, "Se agregó la dieta al paciente.", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+
+        if (operacion == Constantes.AGREGAR) {
+            if (persistenciaFachada.registrarDieta(dieta)) {
+                JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+                dietas = persistenciaFachada.buscarDietas();
+                llenarCatalogo(dietas, INDEX_DEFAULT, "todos");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+            }
         }
         
-        if(persistenciaFachada.registrarDieta(dieta)){
-            JOptionPane.showMessageDialog(null, "Dieta guardada con éxito "+msg, "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
-            dietas = persistenciaFachada.buscarDietas();
-            llenarCatalogo(dietas, INDEX_DEFAULT, "todos");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error", "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
+        if(operacion == Constantes.ACTUALIZAR){
+            dispose();
         }
-        
+
     }//GEN-LAST:event_panelGuardarMousePressed
 
     private void lblArribaDesayunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblArribaDesayunoMousePressed
         if (indexDesayuno > 0) {
             indexDesayuno--;
+            desayunosCatalogo--;
             llenarCatalogo(dietas, indexDesayuno, "desayuno");
             resetearSeleccion(0);
             seleccionDesayuno = -1;
@@ -1032,7 +1056,8 @@ public class catalogoDieta extends javax.swing.JFrame {
 
     private void lblAbajoDesayunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbajoDesayunoMousePressed
 
-        if (indexDesayuno % dietas.size() == 0) {
+        if (desayunosCatalogo < dietas.size()) {
+            desayunosCatalogo++;
             indexDesayuno++;
             llenarCatalogo(dietas, indexDesayuno, "desayuno");
             resetearSeleccion(0);
@@ -1043,6 +1068,7 @@ public class catalogoDieta extends javax.swing.JFrame {
     private void lblArribaComidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblArribaComidaMousePressed
         if (indexComida > 0) {
             indexComida--;
+            comidasCatalogo--;
             llenarCatalogo(dietas, indexComida, "comida");
             resetearSeleccion(1);
             seleccionComida = -1;
@@ -1050,7 +1076,8 @@ public class catalogoDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_lblArribaComidaMousePressed
 
     private void lblAbajoComidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbajoComidaMousePressed
-        if (indexComida % dietas.size() == 0) {
+        if (comidasCatalogo < dietas.size()) {
+            comidasCatalogo++;
             indexComida++;
             llenarCatalogo(dietas, indexComida, "comida");
             resetearSeleccion(1);
@@ -1061,6 +1088,7 @@ public class catalogoDieta extends javax.swing.JFrame {
     private void lblArribaCenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblArribaCenaMousePressed
         if (indexCena > 0) {
             indexCena--;
+            cenasCatalogo--;
             llenarCatalogo(dietas, indexCena, "cena");
             resetearSeleccion(2);
             seleccionCena = -1;
@@ -1068,8 +1096,9 @@ public class catalogoDieta extends javax.swing.JFrame {
     }//GEN-LAST:event_lblArribaCenaMousePressed
 
     private void lblAbajoCenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAbajoCenaMousePressed
-        if (indexCena % dietas.size() == 0) {
+        if (cenasCatalogo < dietas.size()) {
             indexCena++;
+            cenasCatalogo++;
             llenarCatalogo(dietas, indexCena, "cena");
             resetearSeleccion(2);
             seleccionCena = -1;

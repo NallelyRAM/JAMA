@@ -134,7 +134,7 @@ public class DietaDialog extends javax.swing.JFrame {
         txtAcompañanteCena = new javax.swing.JTextArea();
         txtNumCaloriasCena = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Dieta");
         setResizable(false);
 

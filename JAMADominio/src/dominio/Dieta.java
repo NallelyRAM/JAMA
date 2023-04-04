@@ -33,7 +33,19 @@ public class Dieta {
         this.comida = comida;
         this.cena = cena;
     }
-
+    
+    
+    public Dieta(int idDieta, String nombreDieta, Date fechaInicio, Date fechaFinal, int diaSemana, Desayuno desayuno, Comida comida, Cena cena) {
+        this.nombreDieta = nombreDieta;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        this.diaSemana = diaSemana;
+        this.desayuno = desayuno;
+        this.comida = comida;
+        this.cena = cena;
+        this.idDieta = idDieta;
+    }
+    
     public String getNombreDieta() {
         return nombreDieta;
     }

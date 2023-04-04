@@ -197,7 +197,7 @@ public class FrInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarDietaActionPerformed
 
     private void btnCatalogoDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoDietasActionPerformed
-        new catalogoDieta(new Paciente()).setVisible(true);
+        new CatalogoDieta(new Paciente(), Constantes.AGREGAR).setVisible(true);
     }//GEN-LAST:event_btnCatalogoDietasActionPerformed
 
     /**

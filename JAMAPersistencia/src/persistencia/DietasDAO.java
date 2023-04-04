@@ -507,6 +507,7 @@ public class DietasDAO implements IDietasDAO {
             // Procesar los resultados
             while (resultado.next()) {
                 // Obtener los valores de cada columna
+                int idDieta = resultado.getInt("idDieta");
                 String nombreDieta = resultado.getString("nombre");
                 Date fechaInicio = resultado.getDate("fechaInicio");
                 Date fechaFinal = resultado.getDate("fechaFinal");
@@ -615,7 +616,7 @@ public class DietasDAO implements IDietasDAO {
                 cena = new Cena(idCena, platillo.getNombre(), platillo.getIngredientes(), platillo.getAcompanante(), platillo.getNumCalorias(),
                         platillo.getFoto());
 
-                dietas.add(new Dieta(nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena));
+                dietas.add(new Dieta(idDieta, nombreDieta, fechaInicio, fechaFinal, diaSemana, desayuno, comida, cena));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

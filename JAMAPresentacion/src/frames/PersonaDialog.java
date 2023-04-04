@@ -84,7 +84,6 @@ public class PersonaDialog extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         dateChooser = new com.toedter.calendar.JDateChooser();
-        btnLimpiar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnBuscarPaciente = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
@@ -166,14 +165,6 @@ public class PersonaDialog extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar1.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
-        btnLimpiar1.setText("Agregar Dieta");
-        btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiar1ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Si desea dieta...");
 
         btnBuscarPaciente.setFont(new java.awt.Font("OCR A Extended", 0, 18)); // NOI18N
@@ -233,9 +224,7 @@ public class PersonaDialog extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(4, 4, 4)
-                        .addComponent(btnLimpiar1)
-                        .addGap(243, 243, 243))
+                        .addGap(391, 391, 391))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnBuscarPaciente)
                         .addContainerGap())))
@@ -274,11 +263,9 @@ public class PersonaDialog extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar1)
-                    .addComponent(jLabel1))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnCancelar)
@@ -373,10 +360,6 @@ public class PersonaDialog extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
-
-    private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
 
@@ -489,7 +472,6 @@ public class PersonaDialog extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPaciente;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> comboSexo;
     private com.toedter.calendar.JDateChooser dateChooser;
