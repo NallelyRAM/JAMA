@@ -19,7 +19,7 @@ public class ConexionBD implements IConexionBD {
 
     private static final String CADENA_CONEXION = "jdbc:mysql://localhost/jama";
     private static final String USUARIO = "root";
-    private static final String CONTRASENIA = "root";
+    private static final String CONTRASENIA = "12345";
     private static Connection conexion;
     private static ConexionBD conexionBD;
 

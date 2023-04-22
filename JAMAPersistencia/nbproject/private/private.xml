@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMAPersistencia/src/persistencia/DietasDAO.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMAPersistencia/src/interfaces/IDietasDAO.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMAPersistencia/src/factory/DAOSFactory.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMAPersistencia/src/persistencia/Persistencia.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/JAMA/JAMAPersistencia/src/persistencia/PacientesDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
