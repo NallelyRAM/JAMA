@@ -196,8 +196,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
-        panelGuardar = new javax.swing.JPanel();
-        lblCenas1 = new javax.swing.JLabel();
+        JbGuardar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblDesayunos = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -253,31 +252,14 @@ public class CatalogoDieta extends javax.swing.JFrame {
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
 
-        panelGuardar.setBackground(new java.awt.Color(204, 204, 204));
-        panelGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                panelGuardarMousePressed(evt);
+        JbGuardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        JbGuardar.setText("Guardar");
+        JbGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        JbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JbGuardarActionPerformed(evt);
             }
         });
-
-        lblCenas1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblCenas1.setForeground(new java.awt.Color(0, 0, 0));
-        lblCenas1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCenas1.setText("Guardar");
-
-        javax.swing.GroupLayout panelGuardarLayout = new javax.swing.GroupLayout(panelGuardar);
-        panelGuardar.setLayout(panelGuardarLayout);
-        panelGuardarLayout.setHorizontalGroup(
-            panelGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblCenas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-        );
-        panelGuardarLayout.setVerticalGroup(
-            panelGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGuardarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblCenas1))
-        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -286,35 +268,34 @@ public class CatalogoDieta extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
-                .addComponent(panelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(401, 401, 401))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 542, Short.MAX_VALUE)
+                .addComponent(JbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(376, 376, 376))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(Logo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Logo)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(JbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 0, 1228, 103);
+        jPanel3.setBounds(0, 0, 1228, 98);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblDesayunos.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblDesayunos.setForeground(new java.awt.Color(0, 0, 0));
         lblDesayunos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDesayunos.setText("Desayunos");
 
         lblArribaDesayuno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/arriba.PNG"))); // NOI18N
         lblArribaDesayuno.setText("jLabel4");
-        lblArribaDesayuno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblArribaDesayuno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblArribaDesayuno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblArribaDesayunoMousePressed(evt);
@@ -323,7 +304,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
 
         lblAbajoDesayuno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/abajo.PNG"))); // NOI18N
         lblAbajoDesayuno.setText("jLabel5");
-        lblAbajoDesayuno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAbajoDesayuno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblAbajoDesayuno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblAbajoDesayunoMousePressed(evt);
@@ -331,8 +312,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         myPanelDesayuno1.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelDesayuno1.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelDesayuno1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelDesayuno1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelDesayuno1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelDesayuno1MousePressed(evt);
@@ -340,10 +320,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenDesayuno1.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenDesayuno1.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreDesayuno1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreDesayuno1.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreDesayuno1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreDesayuno1.setText("  ");
 
@@ -363,8 +341,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         myPanelDesayuno3.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelDesayuno3.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelDesayuno3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelDesayuno3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelDesayuno3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelDesayuno3MousePressed(evt);
@@ -372,10 +349,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenDesayuno2.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenDesayuno2.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreDesayuno2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreDesayuno2.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreDesayuno2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreDesayuno2.setText(" ");
 
@@ -395,8 +370,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         myPanelDesayuno4.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelDesayuno4.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelDesayuno4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelDesayuno4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelDesayuno4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelDesayuno4MousePressed(evt);
@@ -404,10 +378,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenDesayuno3.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenDesayuno3.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreDesayuno3.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreDesayuno3.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreDesayuno3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreDesayuno3.setText("   ");
 
@@ -427,13 +399,12 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         lblComidas.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblComidas.setForeground(new java.awt.Color(0, 0, 0));
         lblComidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblComidas.setText("Comidas");
 
         lblArribaComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/arriba.PNG"))); // NOI18N
         lblArribaComida.setText("jLabel4");
-        lblArribaComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblArribaComida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblArribaComida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblArribaComidaMousePressed(evt);
@@ -441,8 +412,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         myPanelComida2.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelComida2.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelComida2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelComida2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelComida2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelComida2MousePressed(evt);
@@ -450,10 +420,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenComidaDos.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenComidaDos.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreComida2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreComida2.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreComida2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreComida2.setText(" ");
 
@@ -473,8 +441,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         myPanelComida1.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelComida1.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelComida1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelComida1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelComida1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelComida1MousePressed(evt);
@@ -482,10 +449,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenComida1.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenComida1.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreComida1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreComida1.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreComida1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreComida1.setText("  ");
 
@@ -505,8 +470,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         myPanelComida3.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelComida3.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelComida3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelComida3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelComida3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelComida3MousePressed(evt);
@@ -514,10 +478,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenComida3.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenComida3.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreComida3.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreComida3.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreComida3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreComida3.setText(" ");
 
@@ -538,7 +500,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
 
         lblAbajoComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/abajo.PNG"))); // NOI18N
         lblAbajoComida.setText("jLabel5");
-        lblAbajoComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAbajoComida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblAbajoComida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblAbajoComidaMousePressed(evt);
@@ -546,8 +508,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         myPanelCena1.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelCena1.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelCena1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelCena1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelCena1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelCena1MousePressed(evt);
@@ -555,10 +516,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenCena1.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenCena1.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreCena1.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreCena1.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreCena1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreCena1.setText("  ");
 
@@ -578,8 +537,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         );
 
         myPanelCena3.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelCena3.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelCena3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelCena3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelCena3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelCena3MousePressed(evt);
@@ -587,10 +545,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenCena3.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenCena3.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreCena3.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreCena3.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreCena3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreCena3.setText(" ");
 
@@ -611,7 +567,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
 
         lblAbajoCena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/abajo.PNG"))); // NOI18N
         lblAbajoCena.setText("jLabel5");
-        lblAbajoCena.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAbajoCena.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblAbajoCena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblAbajoCenaMousePressed(evt);
@@ -619,13 +575,12 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblCenas.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblCenas.setForeground(new java.awt.Color(0, 0, 0));
         lblCenas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCenas.setText("Cenas");
 
         lblArribaCena.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/arriba.PNG"))); // NOI18N
         lblArribaCena.setText("jLabel4");
-        lblArribaCena.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblArribaCena.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblArribaCena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblArribaCenaMousePressed(evt);
@@ -633,8 +588,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         myPanelCena2.setBackground(new java.awt.Color(204, 204, 204));
-        myPanelCena2.setForeground(new java.awt.Color(0, 0, 0));
-        myPanelCena2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myPanelCena2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         myPanelCena2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 myPanelCena2MousePressed(evt);
@@ -642,10 +596,8 @@ public class CatalogoDieta extends javax.swing.JFrame {
         });
 
         lblImagenCena2.setBackground(new java.awt.Color(0, 0, 0));
-        lblImagenCena2.setForeground(new java.awt.Color(0, 0, 0));
 
         lblNombreCena2.setFont(new java.awt.Font("OCR A Extended", 1, 24)); // NOI18N
-        lblNombreCena2.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreCena2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreCena2.setText("  ");
 
@@ -987,63 +939,6 @@ public class CatalogoDieta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_myPanelCena2MousePressed
 
-    private void panelGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGuardarMousePressed
-
-        String nombreDieta = "";
-        int idDieta = 0;
-        for (int i = 0; i < dietas.size(); i++) {
-            Dieta myDieta = dietas.get(i);
-            if (myDieta.getDesayuno() == dietas.get(seleccionDesayuno).getDesayuno()
-                    && myDieta.getComida() == dietas.get(seleccionComida).getComida()
-                    && myDieta.getCena() == dietas.get(seleccionCena).getCena()) {
-                if (operacion == Constantes.AGREGAR) {
-                    String mensaje = "Ya existe una dieta igual y es '" + myDieta.getNombreDieta() + "'";
-                    JOptionPane.showMessageDialog(null, mensaje, "Dietas",
-                            JOptionPane.INFORMATION_MESSAGE, null);
-                    
-                }
-                idDieta = dietas.get(i).getIdDieta();
-                nombreDieta = myDieta.getNombreDieta();
-            } 
-        }
-
-        if (operacion == Constantes.AGREGAR) {
-            nombreDieta = (String) JOptionPane.showInputDialog(null, "Ingrese el nombre de la Dieta",
-                    "Catalogo de Dietas", JOptionPane.INFORMATION_MESSAGE, Logo.getIcon(),
-                    null, null);
-        }
-
-        Dieta dieta = new Dieta(idDieta, nombreDieta, new Date(), Date.from(LocalDate.now().
-                plusWeeks(1).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0,
-                dietas.get(seleccionDesayuno).getDesayuno(), dietas.get(seleccionComida).getComida(),
-                dietas.get(seleccionCena).getCena());
-
-        if (operacion == Constantes.ACTUALIZAR) {
-            if (paciente.getNombre() != null) {
-                paciente.setDieta(dieta);
-                JOptionPane.showMessageDialog(null, "Se agregó la dieta al paciente.", "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
-            }
-        }
-
-        if (operacion == Constantes.AGREGAR) {
-            if (persistenciaFachada.registrarDieta(dieta)) {
-                JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.", "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
-                dietas = persistenciaFachada.buscarDietas();
-                llenarCatalogo(dietas, INDEX_DEFAULT, "todos");
-            } else {
-                JOptionPane.showMessageDialog(null, "Ocurrió un error", "Dietas",
-                        JOptionPane.INFORMATION_MESSAGE, null);
-            }
-        }
-        
-        if(operacion == Constantes.ACTUALIZAR){
-            dispose();
-        }
-
-    }//GEN-LAST:event_panelGuardarMousePressed
-
     private void lblArribaDesayunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblArribaDesayunoMousePressed
         if (indexDesayuno > 0) {
             indexDesayuno--;
@@ -1105,6 +1000,61 @@ public class CatalogoDieta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblAbajoCenaMousePressed
 
+    private void JbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbGuardarActionPerformed
+         String nombreDieta = "";
+        int idDieta = 0;
+        for (int i = 0; i < dietas.size(); i++) {
+            Dieta myDieta = dietas.get(i);
+            if (myDieta.getDesayuno() == dietas.get(seleccionDesayuno).getDesayuno()
+                    && myDieta.getComida() == dietas.get(seleccionComida).getComida()
+                    && myDieta.getCena() == dietas.get(seleccionCena).getCena()) {
+                if (operacion == Constantes.AGREGAR) {
+                    String mensaje = "Ya existe una dieta igual y es '" + myDieta.getNombreDieta() + "'";
+                    JOptionPane.showMessageDialog(null, mensaje, "Dietas",
+                            JOptionPane.INFORMATION_MESSAGE, null);
+                    
+                }
+                idDieta = dietas.get(i).getIdDieta();
+                nombreDieta = myDieta.getNombreDieta();
+            } 
+        }
+
+        if (operacion == Constantes.AGREGAR) {
+            nombreDieta = (String) JOptionPane.showInputDialog(null, "Ingrese el nombre de la Dieta",
+                    "Catalogo de Dietas", JOptionPane.INFORMATION_MESSAGE, Logo.getIcon(),
+                    null, null);
+        }
+
+        Dieta dieta = new Dieta(idDieta, nombreDieta, new Date(), Date.from(LocalDate.now().
+                plusWeeks(1).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0,
+                dietas.get(seleccionDesayuno).getDesayuno(), dietas.get(seleccionComida).getComida(),
+                dietas.get(seleccionCena).getCena());
+
+        if (operacion == Constantes.ACTUALIZAR) {
+            if (paciente.getNombre() != null) {
+                paciente.setDieta(dieta);
+                JOptionPane.showMessageDialog(null, "Se agregó la dieta al paciente.", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+
+        if (operacion == Constantes.AGREGAR) {
+            if (persistenciaFachada.registrarDieta(dieta)) {
+                JOptionPane.showMessageDialog(null, "Dieta guardada con éxito.", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+                dietas = persistenciaFachada.buscarDietas();
+                llenarCatalogo(dietas, INDEX_DEFAULT, "todos");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error", "Dietas",
+                        JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
+        
+        if(operacion == Constantes.ACTUALIZAR){
+            dispose();
+        }
+    }//GEN-LAST:event_JbGuardarActionPerformed
+
     private void abrirDialogInformacion(JMenuItem menuItem, Platillo platillo) {
         menuItem.addActionListener(new ActionListener() {
             @Override
@@ -1159,6 +1109,7 @@ public class CatalogoDieta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JbGuardar;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -1178,7 +1129,6 @@ public class CatalogoDieta extends javax.swing.JFrame {
     private javax.swing.JLabel lblArribaComida;
     private javax.swing.JLabel lblArribaDesayuno;
     private javax.swing.JLabel lblCenas;
-    private javax.swing.JLabel lblCenas1;
     private javax.swing.JLabel lblComidas;
     private javax.swing.JLabel lblDesayunos;
     private javax.swing.JLabel lblImagenCena1;
@@ -1208,6 +1158,5 @@ public class CatalogoDieta extends javax.swing.JFrame {
     private javax.swing.JPanel myPanelDesayuno1;
     private javax.swing.JPanel myPanelDesayuno3;
     private javax.swing.JPanel myPanelDesayuno4;
-    private javax.swing.JPanel panelGuardar;
     // End of variables declaration//GEN-END:variables
 }

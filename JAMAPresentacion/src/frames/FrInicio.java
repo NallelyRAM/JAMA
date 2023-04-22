@@ -20,8 +20,8 @@ public class FrInicio extends javax.swing.JFrame {
     public FrInicio() {
         initComponents();
         setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        setExtendedState(this.MAXIMIZED_BOTH);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -33,106 +33,26 @@ public class FrInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btnAgregarPaciente = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnActualizarPaciente = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        btnAgregarDieta = new javax.swing.JButton();
-        btnActualizarDieta = new javax.swing.JButton();
-        btnCatalogoDietas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        itemAgregarDieta = new javax.swing.JMenu();
+        itemAgregarPaciente = new javax.swing.JMenuItem();
+        agregarDieta = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        itemActualiarPaciente = new javax.swing.JMenuItem();
+        itemActualizarDieta = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        itemMostrarCatalogo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio");
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(204, 255, 153));
-
-        btnAgregarPaciente.setText("Agregar paciente");
-        btnAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarPacienteActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 24)); // NOI18N
-        jLabel1.setText("Menu");
-
-        btnActualizarPaciente.setText("Actualizar paciente");
-        btnActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarPacienteActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel2.setText("Acerca de ......");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        btnAgregarDieta.setText("Agregar Dieta");
-        btnAgregarDieta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarDietaActionPerformed(evt);
-            }
-        });
-
-        btnActualizarDieta.setText("Actualizar Dieta");
-        btnActualizarDieta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarDietaActionPerformed(evt);
-            }
-        });
-
-        btnCatalogoDietas.setText("Catalogo de Dietas");
-        btnCatalogoDietas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCatalogoDietasActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCatalogoDietas, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarDieta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(btnAgregarPaciente)
-                .addGap(28, 28, 28)
-                .addComponent(btnActualizarPaciente)
-                .addGap(28, 28, 28)
-                .addComponent(btnAgregarDieta)
-                .addGap(28, 28, 28)
-                .addComponent(btnActualizarDieta)
-                .addGap(29, 29, 29)
-                .addComponent(btnCatalogoDietas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(49, 49, 49))
-        );
+        setPreferredSize(new java.awt.Dimension(783, 642));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setPreferredSize(new java.awt.Dimension(867, 618));
+        jPanel2.setRequestFocusEnabled(false);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
 
@@ -141,64 +61,119 @@ public class FrInicio extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(326, 326, 326)
                 .addComponent(Logo)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(379, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(217, 217, 217)
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 204, 0));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        itemAgregarDieta.setText("Agregar");
+        itemAgregarDieta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        itemAgregarPaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itemAgregarPaciente.setText("Agregar paciente");
+        itemAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAgregarPacienteActionPerformed(evt);
+            }
+        });
+        itemAgregarDieta.add(itemAgregarPaciente);
+
+        agregarDieta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        agregarDieta.setText("Agregar dieta");
+        agregarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarDietaActionPerformed(evt);
+            }
+        });
+        itemAgregarDieta.add(agregarDieta);
+
+        jMenuBar1.add(itemAgregarDieta);
+
+        jMenu2.setText("Actualizar");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        itemActualiarPaciente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itemActualiarPaciente.setText("Actualizar paciente");
+        itemActualiarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemActualiarPacienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemActualiarPaciente);
+
+        itemActualizarDieta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itemActualizarDieta.setText("Actualizar dieta");
+        itemActualizarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemActualizarDietaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemActualizarDieta);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Catalogo");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        itemMostrarCatalogo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        itemMostrarCatalogo.setText("Mostrar catalogo");
+        itemMostrarCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMostrarCatalogoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(itemMostrarCatalogo);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacienteActionPerformed
+    
+    private void itemAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgregarPacienteActionPerformed
         new PersonaDialog(new Persona(), new Paciente(), Constantes.AGREGAR);
-    }//GEN-LAST:event_btnAgregarPacienteActionPerformed
+    }//GEN-LAST:event_itemAgregarPacienteActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void btnActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPacienteActionPerformed
-        new PersonaDialog(new Persona(), new Paciente(), Constantes.ACTUALIZAR);
-    }//GEN-LAST:event_btnActualizarPacienteActionPerformed
-
-    private void btnAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDietaActionPerformed
-
+    private void agregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarDietaActionPerformed
         new DietaDialog(Constantes.AGREGAR).setVisible(true);
+    }//GEN-LAST:event_agregarDietaActionPerformed
 
-    }//GEN-LAST:event_btnAgregarDietaActionPerformed
+    private void itemActualiarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemActualiarPacienteActionPerformed
+        new PersonaDialog(new Persona(), new Paciente(), Constantes.ACTUALIZAR);
+    }//GEN-LAST:event_itemActualiarPacienteActionPerformed
 
-    private void btnActualizarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDietaActionPerformed
-
+    private void itemActualizarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemActualizarDietaActionPerformed
         new DietaDialog(Constantes.ACTUALIZAR).setVisible(true);
+    }//GEN-LAST:event_itemActualizarDietaActionPerformed
 
-    }//GEN-LAST:event_btnActualizarDietaActionPerformed
-
-    private void btnCatalogoDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatalogoDietasActionPerformed
+    private void itemMostrarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMostrarCatalogoActionPerformed
         new CatalogoDieta(new Paciente(), Constantes.AGREGAR).setVisible(true);
-    }//GEN-LAST:event_btnCatalogoDietasActionPerformed
+    }//GEN-LAST:event_itemMostrarCatalogoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,14 +212,15 @@ public class FrInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
-    private javax.swing.JButton btnActualizarDieta;
-    private javax.swing.JButton btnActualizarPaciente;
-    private javax.swing.JButton btnAgregarDieta;
-    private javax.swing.JButton btnAgregarPaciente;
-    private javax.swing.JButton btnCatalogoDietas;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem agregarDieta;
+    private javax.swing.JMenuItem itemActualiarPaciente;
+    private javax.swing.JMenuItem itemActualizarDieta;
+    private javax.swing.JMenu itemAgregarDieta;
+    private javax.swing.JMenuItem itemAgregarPaciente;
+    private javax.swing.JMenuItem itemMostrarCatalogo;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
