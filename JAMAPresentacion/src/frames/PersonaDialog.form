@@ -64,7 +64,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Logo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" pref="548" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
@@ -75,7 +75,7 @@
         <Component class="javax.swing.JLabel" name="Logo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagen/logochico.PNG"/>
+              <Image iconType="3" name="/imagen/LogoC_SinFondo.png"/>
             </Property>
           </Properties>
         </Component>

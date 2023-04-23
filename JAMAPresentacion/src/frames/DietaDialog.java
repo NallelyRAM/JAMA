@@ -140,7 +140,7 @@ public class DietaDialog extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 153));
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logochico.PNG"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/LogoC_SinFondo.png"))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel10.setText("Nutriólogo:");
@@ -167,7 +167,7 @@ public class DietaDialog extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(31, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(lblNombreNutriologo1))
